@@ -8,13 +8,12 @@ ip_fmt = {'amazon':'ip_prefix','google':'ipv4Prefix','azure':'addressPrefix'}
 scope_fmt = {'aws':'region','gcp':'scope','azure':''}
 
 def get_co2(service,scope):
-    if service == 'aws':
-        fileEnd = scope.replace('-', '_')
-        path = HOME/f'../assets/networking-emissions/{service}/{service}-{fileEnd}.json'
-        if path.exists():
-            with open(HOME/f'../assets/networking-emissions/{service}/{service}-{fileEnd}.json', 'r') as file:
-                data = json.load(file)
-                return data["co2e"]
+    fileEnd = scope.replace('-', '_')
+    path = HOME/f'../assets/networking-emissions/{service}/{service}-{fileEnd}.json'
+    if path.exists():
+        with open(HOME/f'../assets/networking-emissions/{service}/{service}-{fileEnd}.json', 'r') as file:
+            data = json.load(file)
+            return data["co2e"]
     else:
         print(service, scope)
 

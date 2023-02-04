@@ -38,5 +38,10 @@ update_row('Alex', '2023-02-08 12:00:00', 'www.example.com', 'Food', 25, 'www.ex
 update_row('Jack', '2023-02-09 12:00:00', 'www.anothersite.com', 'Electricity', 35, 'www.anothersite.com/logo.png')
 
 
+def get_websites(name):
+    return db.execute(f"SELECT website, logo_URL, category, co2_emissions FROM {name} ORDER BY timestamp")
 
+def data_points(name):
+    points = db.execute(f"SELECT timestamp, co2_emissions FROM {name} ORDER BY timestamp")
+    print(points)
 

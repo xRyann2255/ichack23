@@ -1,0 +1,27 @@
+{
+  "co2e": 0.0007117,
+  "co2e_unit": "kg",
+  "co2e_calculation_method": "ar4",
+  "co2e_calculation_origin": "source",
+  "emission_factor": {
+    "activity_id": "networking-provider_gcp-region_asia_southeast_2",
+    "uuid": "f1a9bdbc-3948-4922-82a7-6da3a05f3f87",
+    "id": "networking-provider_gcp-region_asia_southeast_2",
+    "access_type": "public",
+    "source": "CCF",
+    "year": "2022",
+    "region": "ID-JKT",
+    "category": "Cloud Computing - Networking",
+    "lca_activity": "use_phase",
+    "data_quality_flags": [
+      "notable_methodological_variance"
+    ]
+  },
+  "constituent_gases": {
+    "co2e_total": 0.0007117,
+    "co2e_other": null,
+    "co2": null,
+    "ch4": null,
+    "n2o": null
+  }
+}

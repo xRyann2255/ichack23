@@ -1,16 +1,14 @@
 import sqlite3
 
-db = sqlite3.connect('test.db')
+import pathlib
+
+HOME = pathlib.Path(__file__).parent.absolute()
+
+db = sqlite3.connect(HOME/'test.db')
 
 c = db.cursor()
 c.execute(
 """
-CREATE DATABASE carbon_footprint;
-
--- Use the database
-USE carbon_footprint;
-
--- Create a template for user tables
 CREATE TABLE user_template (
   timestamp TIMESTAMP NOT NULL,
   website VARCHAR(255) NOT NULL,
@@ -20,3 +18,4 @@ CREATE TABLE user_template (
 );
 """
 )
+

@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <title>CarbonClicker</title>
+    <title>Carbonara</title>
     <link rel="icon" type="image/x-icon" href="favicon.png">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -16,13 +16,28 @@
     <script src="main.js"></script>
 </head>
 <body>
+<div id="slider">
+    <div id="mainSlide">
+        <div id="stats">
+            <h2>You have produced</h2>
+            <h1 id="statsKg">&nbsp;</h1>
+            <h3>of CO<sub>2</sub></h3>
+            <div id="leaderboardButton" onclick="leaderboardSlide()">Leaderboard ></div>
+        </div>
 
-<div id="stats">
-    <h3>You have produced</h3>
-    <h2 id="statsKg"></h2>
-</div>
-<canvas id="carbonPerTime"></canvas>
-<div id="categories">
+        <canvas id="carbonPerTime"></canvas>
+        <div id="categories">
+        </div>
+    </div>
+    <div id="leaderboardSlide">
+        <h4>Leaderboard</h4>
+        <div class="buttonBar">
+            <div id="mainScreenButton" onclick="mainSlide()">< Stats</div>
+            <div id="addFriend" onclick="addFriend()">Add Friend</div>
+        </div>
+        <div id="leaderboard">
+        </div>
+    </div>
 </div>
 <div id="templates">
     <div class="category" onclick="toggleCollapse(this)">
@@ -39,6 +54,18 @@
         <div class="flexElement"></div>
         <div class="siteAmount">0 kg</div>
         <div class="sitePercent">43.18%</div>
+    </div>
+
+    <div class="leaderboard-header">
+        <h5>Name</h5>
+        <div class="flexElement"></div>
+        <h5>CO<sub>2</sub> emissions</h5>
+    </div>
+    <div class="leaderboard-row">
+        <h6 class="leaderboardRank">1</h6>
+        <h6 class="leaderboardName">Person A</h6>
+        <div class="flexElement"></div>
+        <h6 class="leaderboardAmount">52.73 kg</h6>
     </div>
 </div>
 </body>

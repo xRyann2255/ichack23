@@ -1,5 +1,3 @@
-
-
 function adjustSiteColor(amount, maxAmount) {
     let p = 1 - (amount / maxAmount)
     if (p > 0.5) {
@@ -110,6 +108,7 @@ function toggleCollapse(element) {
 function onLoad() {
     loadCategories();
     loadGraph();
+    loadLeaderboard();
 }
 
 async function loadCategories() {
@@ -127,7 +126,7 @@ async function loadCategories() {
                 {name: "Ebay", percentage: 0, amount: 16.1245}
             ]
         }
-    ]; await sleep(2000); // TODO: replace when API
+    ]; await sleep(0); // TODO: replace when API
 
     updateCategories(categories);
 }
@@ -137,7 +136,7 @@ async function loadGraph() {
         {time: new Date("'December 17, 2022 03:24:00"), amount: 50},
         {time: new Date("'December 17, 2022 04:00:00"), amount: 60},
         {time: new Date("'December 17, 2022 05:00:00"), amount: 100},
-    ]; await sleep(5000); // TODO: replace when API
+    ]; await sleep(0); // TODO: replace when API
 
     const xValues = [];
     const yValues = [];
@@ -176,8 +175,51 @@ async function loadGraph() {
     const myChart = new Chart("carbonPerTime", config);
 }
 
+async function loadLeaderboard() {
+    const players = [
+        {name: "Jack", amount: 52.73532532},
+        {name: "Jim", amount: 253.7142893},
+        {name: "Timothy", amount: 521.7142893},
+        {name: "Nishant", amount: 525.4322893},
+        {name: "Alex", amount: 598.3245434},
+        {name: "Ryan", amount: 1089.57418789325}
+    ]; await sleep(0); // TODO: replace when API
+
+    let leaderboardElement = document.getElementById("leaderboard");
+    leaderboardElement.replaceChildren();
+
+    let headerTemplate = document.getElementById("templates").getElementsByClassName("leaderboard-header")[0]
+    leaderboardElement.appendChild(headerTemplate.cloneNode(true));
+
+    let rowElement = document.getElementById("templates").getElementsByClassName("leaderboard-row")[0]
+
+    let rank = 0;
+    for (const player of players) {
+        rank++;
+        let e = rowElement.cloneNode(true);
+        e.getElementsByClassName("leaderboardName")[0].innerHTML = player.name;
+        e.getElementsByClassName("leaderboardRank")[0].innerHTML = rank;
+        e.getElementsByClassName("leaderboardAmount")[0].innerHTML = Math.round(player.amount * 100) / 100 + " kg";
+        leaderboardElement.appendChild(e);
+    }
+}
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function leaderboardSlide() {
+    let slider = document.getElementById("slider");
+    slider.classList.add("slide2")
+}
+
+function mainSlide() {
+    let slider = document.getElementById("slider");
+    slider.classList.remove("slide2")
+}
+
+function addFriend() {
+    // TODO
 }
 
 window.onload = onLoad;

@@ -4,8 +4,12 @@
     font-family: "Hanken Grotesk";
 }
 
+body {
+    padding: 20px;
+}
+
 #stats {
-    margin: 40px;
+    padding: 20px;
 }
 
 h3, h2 {
@@ -15,14 +19,38 @@ h3, h2 {
 
 h2 {
     font-size: 48pt;
-}
-
-#categories {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    width: calc(100% - 80px);
-    max-width: 640px;
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-duration: 0.5s;
+    animation-delay: 0.35s;
+    animation-fill-mode: forwards;
+}
+
+h3 {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+#categories {
+    padding: 20px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 720px;
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-duration: 0.5s;
+    animation-delay: 0.7s;
+    animation-fill-mode: forwards;
 }
 
 .categoryHeader {
@@ -34,28 +62,27 @@ h2 {
 }
 
 .categoryCollapse .site {
+    height: 0;
     padding: 0px 25px;
-    line-height: 0px;
-}
-
-.categoryCollapse .site * {
-    opacity: 0;
 }
 
 .site {
-    padding: 15px 25px;
+    overflow: hidden;
+    padding: 0px 25px;
     font-size: 20px;
-    line-height: 20px;
+    height: 60px;
     display: flex;
     background-color: #ffc0c0;
-    transition: padding 0.2s, line-height 0.2s, border-radius 0.2s;
+    align-items: center;
+    transition: padding 0.2s, height 0.2s, border-radius 0.2s;
 }
 
-.site * {
-    opacity: 1;
-    transition: opacity 0.1s;
+.siteIcon {
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
+    border-radius: 8px;
 }
-
 
 .flexElement {
     flex-grow: 1;
@@ -86,4 +113,29 @@ h2 {
 
 #templates {
     display: none;
+}
+
+#carbonPerTime {
+    position: relative;
+    max-width: 680px;
+    max-height: 520px;
+    left: 50%;
+    padding: 20px;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-duration: 0.5s;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%);
+    }
 }

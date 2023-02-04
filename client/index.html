@@ -6,45 +6,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
     <script src="main.js"></script>
 </head>
 <body>
 
 <div id="stats">
     <h3>You have produced</h3>
-    <h2 id="statsKg">85.46 kg</h2>
+    <h2 id="statsKg"></h2>
 </div>
+<canvas id="carbonPerTime"></canvas>
 <div id="categories">
-    <div class="category">
-        <div class="categoryHeader">
-            <div class="categoryName">Streaming</div>
-            <div class="categoryPercent">43.18%</div>
-        </div>
-    </div>
-    <div class="category">
-        <div class="categoryHeader">
-            <div class="categoryName">Streaming</div>
-            <div class="categoryPercent">43.18%</div>
-        </div>
-    </div>
-    <div class="category">
-        <div class="categoryHeader">
-            <div class="categoryName">Streaming</div>
-            <div class="categoryPercent">43.18%</div>
-        </div>
-    </div>
-    <div class="category">
-        <div class="categoryHeader">
-            <div class="categoryName">Streaming</div>
-            <div class="categoryPercent">43.18%</div>
-        </div>
-    </div>
-    <div class="category">
-        <div class="categoryHeader">
-            <div class="categoryName">Streaming</div>
-            <div class="categoryPercent">43.18%</div>
-        </div>
-    </div>
 </div>
 <div id="templates">
     <div class="category" onclick="toggleCollapse(this)">
@@ -56,6 +31,7 @@
         </div>
     </div>
     <div class="site">
+        <img class="siteIcon" src="https://mario.wiki.gallery/images/thumb/1/1c/MIPSBouken.png/150px-MIPSBouken.png">
         <div class="siteName">Streaming</div>
         <div class="flexElement"></div>
         <div class="siteAmount">0 kg</div>

@@ -126,9 +126,6 @@ async function loadCategories() {
                 {name: "Amazon", icon: "https://upload.wikimedia.org/wikipedia/commons/d/de/Amazon_icon.png", percentage: 0, amount: 18.5235},
                 {name: "Ebay", percentage: 0, amount: 16.1245}
             ]
-        },
-        {
-            name: "Nothing", percentage: 0, amount: 0, sites: []
         }
     ]; await sleep(2000); // TODO: replace when API
 

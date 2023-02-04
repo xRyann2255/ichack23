@@ -9,7 +9,7 @@ db = sqlite3.connect(HOME/'test.db')
 def update_row(name, timestamp, website, category, co2_emissions, logo_url):
     db.execute(
 f"""
-CREATE TABLE IF NOT EXISTS main.{name} (
+CREATE TABLE IF NOT EXISTS {name} (
   timestamp TIMESTAMP NOT NULL,
   website VARCHAR(255) NOT NULL,
   category VARCHAR(255) NOT NULL,
@@ -21,10 +21,12 @@ CREATE TABLE IF NOT EXISTS main.{name} (
 )
     db.execute(
 f"""
-INSERT INTO main.{name} (timestamp, website, category, co2_emissions, logo_url)
-VALUES ('{timestamp}', '{website}', '{category}', '{co2_emissions}', '{logo_url}');
+INSERT INTO {name} (timestamp, website, category, co2_emissions, logo_url)
+VALUES ("{timestamp}", "{website}", "{category}", {co2_emissions}, "{logo_url}");
 """
 )
+
+    db.commit()
     
 def get_websites(name):
     return db.execute(f"SELECT website, logo_URL, category, co2_emissions FROM {name} ORDER BY timestamp")

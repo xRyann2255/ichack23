@@ -1,5 +1,7 @@
 import sqlite3
 
+from datetime import datetime
+
 import pathlib
 
 HOME = pathlib.Path(__file__).parent.absolute()
@@ -42,7 +44,7 @@ def data_points(name):
     return points
 
 if __name__ == '__main__':
-    update_row('Ryan', '2023-02-04 12:00:00', 'www.example.com', 'Transportation', 50, 'www.example.com/logo.png')
+    update_row('Ryan', datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'www.example.com', 'Transportation', 50, 'www.example.com/logo.png')
     update_row('Ryan', '2023-02-05 12:00:00', 'www.example.com', 'Food', 30, 'www.example.com/logo.png')
     update_row('Ryan', '2023-02-06 12:00:00', 'www.anothersite.com', 'Electricity', 40, 'www.anothersite.com/logo.png')
     update_row('Ryan', '2023-02-07 12:00:00', 'www.yetanotherexample.com', 'Transportation', 60, 'www.yetanotherexample.com/logo.png')

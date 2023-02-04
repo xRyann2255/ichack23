@@ -2,13 +2,17 @@
   "manifest_version": 3,
   "name": "IC Hack 23",
   "version": "1.0",
+  "permissions": [
+    "webRequest"
+  ],
   "host_permissions": [
-    "http://localhost:3001/*"
+    "http://localhost:3001/*",
+    "*://*/*"
   ],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["ip.js", "main.js"],
+      "js": ["ip.js", "doh.min.js","main.js"],
       "run_at": "document_idle"
     }
   ]

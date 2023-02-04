@@ -1,5 +1,8 @@
 from flask import Flask, request
+import sqlite3
 from flask_restful import Resource, Api
+
+db = sqlite3.connect('test.db')
 
 app = Flask(__name__)
 api = Api(app)

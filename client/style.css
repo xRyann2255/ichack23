@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Hanken Grotesk";
+}
+
+#stats {
+    margin: 40px;
+}
+
+h3, h2 {
+    text-align: center;
+    font-weight: 800;
+}
+
+h2 {
+    font-size: 48pt;
+}
+
+#categories {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 80px);
+    max-width: 640px;
+}
+
+.categoryHeader {
+    padding: 15px 25px;
+    font-size: 20px;
+    display: flex;
+    background-color: #ffa0a0;
+    transition: border-radius 0.2s;
+}
+
+.categoryCollapse .site {
+    padding: 0px 25px;
+    line-height: 0px;
+}
+
+.categoryCollapse .site * {
+    opacity: 0;
+}
+
+.site {
+    padding: 15px 25px;
+    font-size: 20px;
+    line-height: 20px;
+    display: flex;
+    background-color: #ffc0c0;
+    transition: padding 0.2s, line-height 0.2s, border-radius 0.2s;
+}
+
+.site * {
+    opacity: 1;
+    transition: opacity 0.1s;
+}
+
+.flexElement {
+    flex-grow: 1;
+}
+
+.category {
+    transition: transform 0.2s;
+}
+
+.category:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+.category:first-child > *:first-child { border-radius: 16px 16px 0px 0px; }
+.category:last-child > *:last-child { border-radius: 0px 0px 16px 16px; }
+.category:last-child.categoryCollapse > .categoryHeader { border-radius: 0px 0px 16px 16px; }
+.category:first-child:last-child *:first-child:last-child { border-radius: 16px 16px; }
+
+.categoryName {
+    font-weight: 800;
+}
+
+.categoryPercent, .sitePercent {
+    width: 72px;
+    text-align: right;
+}
+
+#templates {
+    display: none;
+}

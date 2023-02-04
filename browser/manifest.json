@@ -1,13 +1,10 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "IC Hack 23",
   "version": "1.0",
-  "permissions": [
-    "history"
+  "host_permissions": [
+    "http://localhost:3001/*"
   ],
-  "background": {
-    "scripts": ["history.js"]
-  },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],

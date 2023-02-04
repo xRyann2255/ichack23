@@ -1,14 +1,20 @@
 console.log("WELCOME TO THIS EXTENSIONS")
-// const LABEL = "ichack23-ext: timelog"
-console.log(window.performance)
 
-this.setTimeout(() => {
-    console.log(getTotalTransferredSize())
-}, 5000)
+const startTime = Date.now()
 
-window.addEventListener("beforeunload", function () {
-    console.log(getTotalTransferredSize())
-}, false)
+window.onbeforeunload = function () {
+    const differenceTime = Date.now() - startTime
+    console.log("Time diff, ", differenceTime)
+    const size = getTotalTransferredSize()
+    console.log(size)
+
+    fetch("http://localhost:3001/example", {
+        method: "POST",
+        body: JSON.stringify({ differenceTime, size }),
+        keepalive: true,
+        mode: "no-cors"
+    })
+}
 
 /* https://developer.mozilla.org/en-US/docs/Web/API/Resource_Timing_API/Using_the_Resource_Timing_API */
 function getTotalTransferredSize() {
@@ -24,10 +30,5 @@ function getTotalTransferredSize() {
         console.log("= Display Size Data: performance.getEntriesByType() is NOT supported");
         return;
     }
-    return entries.reduce((acc, e) => {
-        if (!e || !e.transferSize)
-            return acc
-        else 
-            return acc + e.transferSize
-    }, 0)
+    return entries.reduce((acc, e) => (!e || !e.transferSize) ? acc : acc + e.transferSize, 0)
 }

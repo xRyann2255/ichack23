@@ -1,8 +1,10 @@
 from flask import Flask, request
 import sqlite3
 from flask_restful import Resource, Api
+import pathlib
+HOME = pathlib.Path(__file__).parent.absolute()
 
-db = sqlite3.connect('test.db')
+db = sqlite3.connect(HOME/'test.db')
 
 app = Flask(__name__)
 api = Api(app)

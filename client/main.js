@@ -113,7 +113,6 @@ function updateCategories() {
         categoryHeader.style.backgroundColor = adjustCategoryColor(category.amount, maxCategoryAmount);
 
         categoriesElement.appendChild(categoryElement);
-
     }
 
     document.getElementById("statsKg").innerHTML = Math.round(total * 100) / 100 + " kg"

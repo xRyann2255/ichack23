@@ -15,8 +15,14 @@ app = Flask(__name__)
 api = Api(app)
 
 pyt = pytricia.PyTricia()
+t_addr = t_gigs = 0
 for ip,co2 in json.load(open(HOME/'../assets/all-ranges.json')).items():
     pyt[ip] = co2
+    n = 1 << int(ip.rsplit('/',1)[-1])
+    t_addr += (co2 or 0)  * n
+    t_gigs += n
+avg = t_addr / t_gigs
+print(avg)
 
 # print(pyt.get('3.2.34.1'))
 
@@ -34,12 +40,12 @@ def get_url_data(url:str):
 
 class Rest(Resource):
     def get(self, name):
-        return {}
+        return {"":tools.get_websites(name)}
 
     def put(self, name):
         print(request.json)
         data = request.json["hosts"]
-        co2 = sum(pyt.get(d["ip"])*d["transferred"] for d in data.values()) # fix ratio :/
+        co2 = sum((pyt.get(d["ip"]) or avg)*d["transferred"] for d in data.values()) # fix ratio :/
         url,time = request.json["url"],request.json["timestamp"]
         logo,category = get_url_data(url)
         print(name,time,url,category,co2,logo)

@@ -31,7 +31,9 @@ VALUES ("{timestamp}", "{website}", "{category}", {co2_emissions}, "{logo_url}")
     db.commit()
     
 def get_websites(name):
-    categories = list(set([x[0] for x in db.execute(f"SELECT category FROM {name}").fetchall()]))
+    categories = list( # SELECT DISTINCT ...
+        {x[0] for x in db.execute(f"SELECT category FROM {name}").fetchall()}
+    )
     print(categories)
     for category in categories:
         rows = db.execute(f"SELECT category, website, logo_URL, co2_emissions FROM {name} WHERE category = '{category}'").fetchall()

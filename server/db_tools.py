@@ -32,8 +32,11 @@ def get_websites(name):
     return db.execute(f"SELECT website, logo_URL, category, co2_emissions FROM {name} ORDER BY timestamp")
 
 def data_points(name):
-    points = db.execute(f"SELECT timestamp, co2_emissions FROM {name} ORDER BY timestamp")
-    print(points)
+    points = db.execute(f"SELECT timestamp, co2_emissions FROM {name} ORDER BY timestamp").fetchall()
+    # Starting from the second value, add the previous total to the current value to calculate the overall total at a given time
+    for i, (time, value) in enumerate(points[1:]):
+        points[i+1] = (time, value + points[i][1])
+    return points
 
 if __name__ == '__main__':
     update_row('Ryan', '2023-02-04 12:00:00', 'www.example.com', 'Transportation', 50, 'www.example.com/logo.png')

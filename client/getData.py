@@ -1,4 +1,5 @@
 import json, pathlib
+from tqdm import tqdm
 HOME = pathlib.Path(__file__).parent.absolute()
 
 all_ranges = {}
@@ -13,4 +14,9 @@ def get_co2(service,scope):
 for name in ['amazon','google']:
     with open(HOME/f'../assets/ip-ranges/{name}-ip-ranges.json', 'r') as file:
         data = json.load(file)
-        all_ranges.update({prefix[ip_fmt[name]]: get_co2(services[name],prefix[scope_fmt[name]]) for prefix in data["prefixes"]})
+        all_ranges.update({prefix[ip_fmt[name]]: get_co2(services[name],prefix[scope_fmt[services[name]]])
+            for prefix in tqdm(data["prefixes"]) if ip_fmt[name] in prefix})
+
+# TODO: azure
+
+json.dump(all_ranges, open(HOME/'../assets/all-ranges.json', 'w'))

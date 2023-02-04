@@ -13,11 +13,11 @@ db = sqlite3.connect(HOME/'test.db')
 app = Flask(__name__)
 api = Api(app)
 
-todos = {}
-
 def get_url_data(url:str):
     print('started')
-    data = requests.get(f'https://www.klazify.com/api/categorize?url={url}',headers={'Authorization':f'Bearer {getenv("KTOKEN")}'}).json()
+    resp = requests.post(f'https://www.klazify.com/api/categorize?url={url}',headers={'Authorization':f'Bearer {getenv("KTOKEN")}','User-Agent':'telnet'})
+    print(resp)
+    data = resp.json()
     print(data)
     return dict(
         logo=data["domain"]["logo_url"],

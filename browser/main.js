@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-console.log("WELCOME TO THIS EXTENSIONS")
-=======
 console.log("Welcome to this extension!");
-
-// Using Netmask
-// const netmask = new Netmask('10.0.0.0/12');
-// console.log(netmask.contains('10.0.8.10'));
-// console.log(netmask.contains('192.168.1.20'));
->>>>>>> origin/browser-ext
 
 const startTime = Date.now()
 
@@ -39,11 +30,6 @@ function getTotalTransferredSize() {
         console.log("= Display Size Data: performance.getEntriesByType() is NOT supported");
         return;
     }
-<<<<<<< HEAD
-    return entries.reduce((acc, e) => (!e || !e.transferSize) ? acc : acc + e.transferSize, 0)
-=======
-    return entries.reduce((acc, e) => {
-        return e && e.transferSize ? acc + e.transferSize : acc;
-    }, 0)
->>>>>>> origin/browser-ext
+    
+    return entries.reduce((acc, e) => e && e.transferSize ? acc + e.transferSize : acc, 0)
 }

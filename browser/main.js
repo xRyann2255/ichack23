@@ -1,6 +1,9 @@
-console.log("WELCOME TO THIS EXTENSIONS")
-// const LABEL = "ichack23-ext: timelog"
-console.log(window.performance)
+console.log("Welcome to this extension!");
+
+// Using Netmask
+// const netmask = new Netmask('10.0.0.0/12');
+// console.log(netmask.contains('10.0.8.10'));
+// console.log(netmask.contains('192.168.1.20'));
 
 this.setTimeout(() => {
     console.log(getTotalTransferredSize())
@@ -25,9 +28,6 @@ function getTotalTransferredSize() {
         return;
     }
     return entries.reduce((acc, e) => {
-        if (!e || !e.transferSize)
-            return acc
-        else 
-            return acc + e.transferSize
+        return e && e.transferSize ? acc + e.transferSize : acc;
     }, 0)
 }

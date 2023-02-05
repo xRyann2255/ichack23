@@ -239,6 +239,7 @@ function mainSlide() {
 }
 
 async function addFriend() {
+    console.log("addfriend");
     // TODO: Connect to API
     var other = document.getElementById("friendField").value;
     let data = await fetch("http://35.242.181.37:5000/friends/"+USERNAME+"?password="+PASSWORD+"&other="+other).then(response => response.json());
@@ -282,9 +283,7 @@ document.addEventListener('DOMContentLoaded', function() {
         register();
     });
     let addFriendButton = document.getElementById('addFriendButton');
-    addFriendButton.addEventListener('click', function() {
-        addFriend();
-    });
+    addFriendButton.addEventListener('click', addFriend);
     let closeAddFriend = document.getElementById('closeAddFriend');
     closeAddFriend.addEventListener('click', function() {
         hideAddFriend();
@@ -297,8 +296,8 @@ document.addEventListener('DOMContentLoaded', function() {
     mainScreenButton.addEventListener('click', function() {
         mainSlide();
     });
-    let addFriend = document.getElementById('addFriend');
-    addFriend.addEventListener('click', function() {
+    let addFriend2 = document.getElementById('addFriend');
+    addFriend2.addEventListener('click', function() {
         showAddFriend();
     });
 

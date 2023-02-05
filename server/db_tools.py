@@ -36,6 +36,7 @@ def getCategories(name):
     categories = list( # SELECT DISTINCT ...
         {x[0] for x in db.execute(f"SELECT category FROM {name}").fetchall()}
     )
+    print(categories)
     categoryDict = {}
     for category in categories:
         entries = []

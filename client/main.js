@@ -222,4 +222,13 @@ function addFriend() {
     // TODO
 }
 
+function login() {
+    mainSlide();
+    // TODO
+}
+
+function register() {
+    // TODO
+}
+
 window.onload = onLoad;

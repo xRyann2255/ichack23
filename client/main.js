@@ -219,11 +219,12 @@ async function login() {
     console.log(data)
 
     // TODO: connect to API
-
-    loadCategories();
-    loadGraph();
-    loadLeaderboard();
-    mainSlide();
+    if (data.status === 200) {
+        loadCategories();
+        loadGraph();
+        loadLeaderboard();
+        mainSlide();
+    }
 }
 
 async function register() {

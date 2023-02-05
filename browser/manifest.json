@@ -3,7 +3,8 @@
   "name": "IC Hack 23",
   "version": "1.0",
   "permissions": [
-    "webRequest"
+    "webRequest",
+    "tabs"
   ],
   "host_permissions": [
     "http://localhost:3001/*",
@@ -11,9 +12,18 @@
   ],
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["ip.js", "doh.min.js","main.js"],
-      "run_at": "document_idle"
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "ip.js",
+        "doh.min.js",
+        "main.js"
+      ],
+      "run_at": "document_start"
     }
-  ]
+  ],
+  "background": {
+    "service_worker": "service.js"
+  }
 }

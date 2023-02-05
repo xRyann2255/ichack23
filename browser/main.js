@@ -5,25 +5,31 @@ const resolver = new doh.DohResolver('https://1.1.1.1/dns-query');
 
 // setInterval(getTotalTransferredSize,1000);
 
-setTimeout(() => {
-    getTotalTransferredSize();
-}, 15000)
+// setTimeout(() => {
+//     getTotalTransferredSize();
+// }, 15000)
 
-window.onbeforeunload = function () {
+function getContentBody() {
     const differenceTime = Date.now() - startTime
     console.log("Time diff, ", differenceTime)
     const size = getTotalTransferredSize()
     console.log(size)
 
-    fetch("http://localhost:3001/example", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({"page_view_time": differenceTime, "hosts": aggregated}),
-        keepalive: true,
-        mode: "no-cors"
-    })
+    const data = {
+        "page_view_time": differenceTime, 
+        "hosts": aggregated,
+        "url": window.location.href
+    }
+    // fetch("http://localhost:3001/example", {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify(data),
+    //     keepalive: true,
+    //     mode: "no-cors"
+    // })
+    return data
 }
 
 let aggregated = {};
@@ -93,8 +99,20 @@ function getTotalTransferredSize() {
     console.log(aggregated);
 
     return entries.reduce((acc, e) => {
-
-        // console.log(e);
         return e && e.transferSize ? acc + e.transferSize : acc;
     }, 0)
 }
+
+(() => {
+    function sendContentBody() {
+        const body = getContentBody()
+
+        chrome.runtime.sendMessage(body)
+    }
+
+    const interval = setInterval(() => sendContentBody(), 5 * 1000)
+
+    window.onbeforeunload = function() {
+        clearInterval(interval)
+    }
+})()

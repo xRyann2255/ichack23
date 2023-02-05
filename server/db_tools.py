@@ -102,9 +102,10 @@ def login(name, password):
     else:
         return False
 
-def addFriend(name1, name2):
-    db.execute("""
-        CREATE TABLE IF NOT EXISTS friends (
+def addRelation(name1, name2, type):
+    assert type in ["friends", "local"]
+    db.execute(f"""
+        CREATE TABLE IF NOT EXISTS '{type}' (
             name1 TEXT NOT NULL,
             name2 TEXT NOT NULL
         )
@@ -112,7 +113,7 @@ def addFriend(name1, name2):
 
     try:
 
-        db.execute("""INSERT INTO friends (name1, name2)
+        db.execute(f"""INSERT INTO '{type}' (name1, name2)
         VALUES (?, ?)
         """, (name1, name2))
 
@@ -124,14 +125,14 @@ def addFriend(name1, name2):
 
         return False
 
-def leaderboard(name):
-    friendsList = db.execute("SELECT name2 FROM friends WHERE name1=?", (name,)).fetchall()
+def leaderboard(name, type):
+    assert type in ["friends", "local"]
+    friendsList = db.execute(f"SELECT name2 FROM '{type}' WHERE name1='{name}'").fetchall()
     if len(friendsList) == 0:
         return False
     else:
-        for i, friendName in enumerate(friendsList):
-            friendsList[i] = (friendName[0], loadGraph(friendName[0]).split()[-1][:-2])
-        friendsList.sort(key=lambda x: x[1])
+        friendsList = [(friendName[0], loadGraph(friendName[0]).split()[-1][:-2]) for friendName in friendsList]
+        friendsList.sort(key=lambda x: float(x[1]))
         return json.dumps(friendsList)
 
 if __name__ == '__main__':
@@ -149,8 +150,12 @@ if __name__ == '__main__':
     register("Ryan", "abc")
     register("Jack", "abc")
     register("Alex", "abc")
-    print(addFriend("Ryan", "Jim"))
-    print(addFriend("Ryan", "Alex"))
-    print(addFriend("Ryan", "Jack"))
-    print(leaderboard("Ryan"))
+    print(addRelation("Ryan", "Jim", "friends"))
+    print(addRelation("Ryan", "Alex", "friends"))
+    print(addRelation("Ryan", "Jack", "friends"))
+    print(leaderboard("Ryan", "friends"))
+    print(addRelation("Jim", "Alex", "local"))
+    print(addRelation("Jim", "Jack", "local"))
+    print(addRelation("Jim", "Ryan", "local"))
+    print(leaderboard("Jim", "local"))
     

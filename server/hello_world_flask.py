@@ -75,8 +75,25 @@ class Rest(Resource):
         tools.update_row(name,time,url,category,co2,logo)
         return {}
 
-# class Leaderboard(Resource):
+class Leaderboard(Resource):
+    def get(self,name):
+        if not tools.validate(name,request.args["password"]):
+            return
+        return tools.leaderboard(name,request.args.get("type","friends"))
 
+class Friends(Resource):
+    def get(self,name):
+        if not tools.validate(name,request.args["password"]):
+            return
+        print("friends, do we have those?")
+        return tools.addRelation(name,request.args["other"],"friends")
+
+class Graph(Resource):
+    def get(self,name):
+        if not tools.validate(name,request.args["password"]):
+            return
+        print("friends, do we have those?")
+        return tools.loadGraph(name)
 
 class Auth(Resource):
     def get(self):
@@ -100,6 +117,9 @@ class Auth(Resource):
 
 
 api.add_resource(Auth, '/login')
+api.add_resource(Leaderboard, '/leaderboard/<string:name>')
+api.add_resource(Friends, '/friends/<string:name>')
+api.add_resource(Graph, '/graph/<string:name>')
 api.add_resource(Rest, '/api/<string:name>')
 
 if __name__ == '__main__':

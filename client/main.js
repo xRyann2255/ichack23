@@ -116,6 +116,18 @@ function onLoad() {
 }
 
 async function loadCategories() {
+    const categories = {
+        "Streaming": {percentage: 0, amount: 0, sites: [
+                {name: "Netflix", icon: "https://raw.githubusercontent.com/karlhadwen/netflix/master/public/favicon.ico", percentage: 0, amount: 42.4325},
+                {name: "Amazon Prime", icon: "https://upload.wikimedia.org/wikipedia/commons/d/de/Amazon_icon.png", percentage: 0, amount: 24.231742},
+                {name: "Disney+", percentage: 0, amount: 5.241}
+            ]
+        }, "Shopping": {percentage: 0, amount: 0, sites: [
+                {name: "Amazon", icon: "https://upload.wikimedia.org/wikipedia/commons/d/de/Amazon_icon.png", percentage: 0, amount: 18.5235},
+                {name: "Ebay", percentage: 0, amount: 16.1245}
+            ]
+        }
+    };
     const data = await fetch(
             "http://localhost:5000/api/"+USERNAME+"?password="+PASSWORD
         ).then(response => response.json());
@@ -127,7 +139,10 @@ async function loadGraph() {
         [new Date("'December 17, 2022 03:24:00"), 50],
         [new Date("'December 17, 2022 04:00:00"), 60],
         [new Date("'December 17, 2022 05:00:00"), 100],
-    ]; await sleep(0); // TODO: replace when API
+    ];
+
+    var data = await fetch("http://localhost:5000/graph/"+USERNAME+"?password="+PASSWORD).then(response => response.json());
+    console.log("Pear "+data);
 
     const xValues = [];
     const yValues = [];
@@ -167,14 +182,18 @@ async function loadGraph() {
 }
 
 async function loadLeaderboard() {
-    const players = [
-        {name: "Jack", amount: 52.73532532},
-        {name: "Jim", amount: 253.7142893},
-        {name: "Timothy", amount: 521.7142893},
-        {name: "Nishant", amount: 525.4322893},
-        {name: "Alex", amount: 598.3245434},
-        {name: "Ryan", amount: 1089.57418789325}
-    ]; await sleep(0); // TODO: replace when API
+    // const players = [
+    //     {name: "Jack", amount: 52.73532532},
+    //     {name: "Jim", amount: 253.7142893},
+    //     {name: "Timothy", amount: 521.7142893},
+    //     {name: "Nishant", amount: 525.4322893},
+    //     {name: "Alex", amount: 598.3245434},
+    //     {name: "Ryan", amount: 1089.57418789325}
+    // ];
+    // add type switch, as additional arg "type" = local/friends
+    let data = await fetch("http://localhost:5000/leaderboard/"+USERNAME+"?password="+PASSWORD).then(response => response.json());
+    console.log("banana"+data);
+    const players = JSON.parse(data);
 
     let leaderboardElement = document.getElementById("leaderboard");
     leaderboardElement.replaceChildren();
@@ -210,9 +229,13 @@ function mainSlide() {
     slider.classList.remove("slide2")
 }
 
-function addFriend() {
+async function addFriend() {
     // TODO: Connect to API
+    var other = document.getElementById("friendField").value;
+    let data = await fetch("http://localhost:5000/friends/"+USERNAME+"?password="+PASSWORD+"&other="+other).then(response => response.json());
+    // console.log("coconut"+data);
     hideAddFriend();
+    loadLeaderboard();
 }
 
 function showAddFriend() {

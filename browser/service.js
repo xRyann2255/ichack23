@@ -38,7 +38,7 @@ function flushBuffer() {
     getUsernamePassword();
     fetch("http://35.242.181.37:5000/api/" + auth["username"], {
         method: "post", body: JSON.stringify({"password": auth["password"], "hosts": buffer}, function (key, val) {
-            if (val == null) return "N/A";
+            if (val == null) return null;
             return val.toFixed ? Number(val.toFixed(3)) : val;
         }), headers: {
             "Content-Type": "application/json", "Accept": "application/json"

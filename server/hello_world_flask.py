@@ -85,6 +85,7 @@ def get_url_data(url: str):
 
 
 def get_co2(ip: str):
+    
     return pyt_6.get(ip) or avg_6 if ":" in ip else pyt_4.get(ip) or avg_4
 
 def get_cpu(ip: str):

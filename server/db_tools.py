@@ -134,6 +134,7 @@ def leaderboard(name, type):
     else:
         friendsList = [(friendName[0], loadGraph(friendName[0]).split()[-1][:-2]) for friendName in friendsList]
         friendsList.sort(key=lambda x: float(x[1]))
+        friendsList = [dict(zip(('name','amount'),fs)) for fs in friendsList]
         return json.dumps(friendsList)
 
 if __name__ == '__main__':

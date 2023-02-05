@@ -14,15 +14,27 @@ db = sqlite3.connect(HOME/'test.db')
 app = Flask(__name__)
 api = Api(app)
 
-pyt = pytricia.PyTricia()
+pyt_4 = pytricia.PyTricia()
 t_addr = t_gigs = 0
 for ip,co2 in json.load(open(HOME/'../assets/all-ranges.json')).items():
-    pyt[ip] = co2
+    pyt_4[ip] = co2
     n = 1 << int(ip.rsplit('/',1)[-1])
-    t_addr += (co2 or 0)  * n
-    t_gigs += n
-avg = t_addr / t_gigs
-print(avg)
+    if co2 is not None:
+        t_addr += co2 * n
+        t_gigs += n
+avg_4 = t_addr / t_gigs
+print(avg_4)
+
+pyt_6 = pytricia.PyTricia(128)
+t_addr = t_gigs = 0
+for ip,co2 in json.load(open(HOME/'../assets/v6-ranges.json')).items():
+    pyt_6[ip] = co2
+    n = 1 << int(ip.rsplit('/',1)[-1])
+    if co2 is not None:
+        t_addr += co2 * n
+        t_gigs += n
+avg_6 = t_addr / t_gigs
+print(avg_6)
 
 # print(pyt.get('3.2.34.1'))
 
@@ -37,6 +49,9 @@ def get_url_data(url:str):
         data["domain"]["categories"][0]["IAB12"],
     )
 
+def get_co2(ip:str):
+    return pyt_6.get(ip) or avg_6 if ':' in ip \
+      else pyt_4.get(ip) or avg_4
 
 class Rest(Resource):
     def get(self, name):
@@ -45,14 +60,23 @@ class Rest(Resource):
     def put(self, name):
         print(request.json)
         data = request.json["hosts"]
-        co2 = sum((pyt.get(d["ip"]) or avg)*d["transferred"] for d in data.values()) # fix ratio :/
+        co2 = sum(get_co2(d["ip"])*d["transferred"] for d in data.values()) # fix ratio :/
         url,time = request.json["url"],request.json["timestamp"]
         logo,category = get_url_data(url)
         print(name,time,url,category,co2,logo)
         # tools.update_row(name,time,url,category,co2,logo)
         return {}
 
-api.add_resource(Rest, '/<string:name>')
+class Auth(Resource):
+    def get(self):
+        pass #It's safe I swear
+    
+    def post(self):
+        #check user in db?
+        tools.register(request.form["username"],request.form["password"])
+
+api.add_resource(Auth, '/login')
+api.add_resource(Rest, '/api/<string:name>')
 
 if __name__ == '__main__':
     app.run(debug=True)

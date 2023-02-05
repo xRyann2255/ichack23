@@ -1,13 +1,18 @@
 {
   "manifest_version": 2,
-  "name": "My Extension",
-  "description": "This is my first Chrome extension.",
+  "name": "IC Hack 23",
   "version": "1.0",
-  "browser_action": {
-    "default_icon": "icon.png",
-    "default_popup": "popup.html"
-  },
   "permissions": [
-    "activeTab"
+    "history"
+  ],
+  "background": {
+    "scripts": ["history.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["main.js"],
+      "run_at": "document_start"
+    }
   ]
 }

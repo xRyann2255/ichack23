@@ -21,7 +21,7 @@ def update_row(name, timestamp, website, category, co2_emissions, logo_url):
         newTotal = exists[0][1] + co2_emissions
         db.execute(
             f"""
-            UPDATE '{name}' SET co2_emissions='{newTotal}' WHERE timestamp='{exists[0][0]}'
+            UPDATE {name} SET co2_emissions={newTotal} WHERE timestamp='{exists[0][0]}'
             """
         )
         db.commit()
@@ -80,7 +80,7 @@ def lastMonthData(name):
     categoryTotals = {}
     for category in categories:
         emissions = db.execute(
-            f"SELECT timestamp, co2_emissions FROM '{name}' WHERE category='{category}'"
+            f"SELECT timestamp, co2_emissions FROM {name} WHERE category='{category}'"
         ).fetchall()
         emissions = list(
             filter(lambda x: x[0].split()[0].split("-")[1] == lastMonth, emissions)
@@ -159,7 +159,7 @@ def addRelation(name1, name2, type):
     assert type in ["friends", "local"]
     db.execute(
         f"""
-        CREATE TABLE IF NOT EXISTS '{type}' (
+        CREATE TABLE IF NOT EXISTS {type} (
             name1 TEXT NOT NULL,
             name2 TEXT NOT NULL
         )
@@ -169,7 +169,7 @@ def addRelation(name1, name2, type):
     try:
 
         db.execute(
-            f"""INSERT INTO '{type}' (name1, name2)
+            f"""INSERT INTO {type} (name1, name2)
         VALUES (?, ?)
         """,
             (name1, name2),
@@ -187,7 +187,7 @@ def addRelation(name1, name2, type):
 def leaderboard(name, type):
     assert type in ["friends", "local"]
     friendsList = db.execute(
-        f"SELECT name2 FROM '{type}' WHERE name1='{name}'"
+        f"SELECT name2 FROM {type} WHERE name1='{name}'"
     ).fetchall()
     if len(friendsList) == 0:
         return False

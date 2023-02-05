@@ -36,7 +36,6 @@ def get_websites(name):
     categories = list( # SELECT DISTINCT ...
         {x[0] for x in db.execute(f"SELECT category FROM {name}").fetchall()}
     )
-    categoryDict = {}
     print(categories)
     for category in categories:
         entries = []
@@ -62,7 +61,7 @@ def data_points(name):
     # Starting from the second value, add the previous total to the current value to calculate the overall total at a given time
     for i, (time, value) in enumerate(points[1:]):
         points[i+1] = (time, value + points[i][1])
-    return points
+    return json.dumps(points)
 
 if __name__ == '__main__':
     update_row('Ryan', datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'www.example.com', 'Transportation', 50, 'www.example.com/logo.png')
@@ -75,4 +74,4 @@ if __name__ == '__main__':
     update_row('Alex', '2023-02-07 12:00:00', 'www.yetanotherexample.com', 'Transportation', 60, 'www.yetanotherexample.com/logo.png')
     update_row('Alex', '2023-02-08 12:00:00', 'www.example.com', 'Food', 25, 'www.example.com/logo.png')
     update_row('Jack', '2023-02-09 12:00:00', 'www.anothersite.com', 'Electricity', 35, 'www.anothersite.com/logo.png')
-    print(get_websites('Ryan'))
+    print(data_points('Ryan'))

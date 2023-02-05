@@ -102,6 +102,38 @@ def login(name, password):
     else:
         return False
 
+def addFriend(name1, name2):
+    db.execute("""
+        CREATE TABLE IF NOT EXISTS friends (
+            name1 TEXT NOT NULL,
+            name2 TEXT NOT NULL
+        )
+    """)
+
+    try:
+
+        db.execute("""INSERT INTO friends (name1, name2)
+        VALUES (?, ?)
+        """, (name1, name2))
+
+        db.commit()
+
+        return loadGraph(name2).split()[-1][:-2]
+    
+    except:
+
+        return False
+
+def leaderboard(name):
+    friendsList = db.execute("SELECT name2 FROM friends WHERE name1=?", (name,)).fetchall()
+    if len(friendsList) == 0:
+        return False
+    else:
+        for i, friendName in enumerate(friendsList):
+            friendsList[i] = (friendName[0], loadGraph(friendName[0]).split()[-1][:-2])
+        friendsList.sort(key=lambda x: x[1])
+        return json.dumps(friendsList)
+
 if __name__ == '__main__':
     update_row('Ryan', datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'www.example.com', 'Transportation', 50, 'www.example.com/logo.png')
     update_row('Ryan', '2023-02-05 12:00:00', 'www.example.com', 'Food', 30, 'www.example.com/logo.png')
@@ -113,3 +145,12 @@ if __name__ == '__main__':
     update_row('Alex', '2023-02-07 12:00:00', 'www.yetanotherexample.com', 'Transportation', 60, 'www.yetanotherexample.com/logo.png')
     update_row('Alex', '2023-02-08 12:00:00', 'www.example.com', 'Food', 25, 'www.example.com/logo.png')
     update_row('Jack', '2023-02-09 12:00:00', 'www.anothersite.com', 'Electricity', 35, 'www.anothersite.com/logo.png')
+    register("Jim", "abc")
+    register("Ryan", "abc")
+    register("Jack", "abc")
+    register("Alex", "abc")
+    print(addFriend("Ryan", "Jim"))
+    print(addFriend("Ryan", "Alex"))
+    print(addFriend("Ryan", "Jack"))
+    print(leaderboard("Ryan"))
+    

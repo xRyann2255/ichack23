@@ -23,14 +23,26 @@ CREATE TABLE IF NOT EXISTS {name} (
 );
 """
 )
-    db.execute(
-f"""
-INSERT INTO {name} (timestamp, website, category, co2_emissions, logo_url)
-VALUES ("{timestamp}", "{website}", "{category}", {co2_emissions}, "{logo_url}");
-"""
-)
+    day = timestamp.split()[0]
+    exists = db.execute(f"SELECT timestamp, co2_emissions FROM '{name}' WHERE website = '{website}'").fetchall()
+    exists = list(filter(lambda x: x[0].split()[0] == day, exists))
+    if len(exists) > 0:
+        newTotal = exists[0][1] + co2_emissions
+        db.execute(
+            f"""
+            UPDATE '{name}' SET co2_emissions='{newTotal}' WHERE timestamp='{exists[0][0]}'
+            """
+        )
+        db.commit()
+    else:
+        db.execute(
+    f"""
+    INSERT INTO {name} (timestamp, website, category, co2_emissions, logo_url)
+    VALUES ("{timestamp}", "{website}", "{category}", {co2_emissions}, "{logo_url}");
+    """
+    )
 
-    db.commit()
+        db.commit()
     
 def getCategories(name):
     categories = list( # SELECT DISTINCT ...
@@ -60,6 +72,21 @@ def loadGraph(name):
     for i, (time, value) in enumerate(points[1:]):
         points[i+1] = (time, value + points[i][1])
     return json.dumps(points)
+
+def lastMonthData(name):
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    lastMonth = '0' + str(int(timestamp.split()[0].split('-')[1]) - 1)
+    categories = [x[0] for x in db.execute(f"SELECT DISTINCT category FROM '{name}'").fetchall()]
+    categoryTotals = {}
+    for category in categories:
+        emissions = db.execute(f"SELECT timestamp, co2_emissions FROM '{name}' WHERE category='{category}'").fetchall()
+        emissions = list(filter(lambda x: x[0].split()[0].split('-')[1] == lastMonth, emissions))
+        categoryTotals[category] = sum(map(lambda x: x[1], emissions))
+    return json.dumps(categoryTotals)
+    
+
+
+    print(categories)
 
 def register(name, password):
     letters = string.ascii_lowercase
@@ -134,14 +161,20 @@ def leaderboard(name, type):
     else:
         friendsList = [(friendName[0], loadGraph(friendName[0]).split()[-1][:-2]) for friendName in friendsList]
         friendsList.sort(key=lambda x: float(x[1]))
+        friendsList = [dict(zip(('name','amount'),fs)) for fs in friendsList]
         return json.dumps(friendsList)
 
 if __name__ == '__main__':
     update_row('Ryan', datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'www.example.com', 'Transportation', 50, 'www.example.com/logo.png')
     update_row('Ryan', '2023-02-05 12:00:00', 'www.example.com', 'Food', 30, 'www.example.com/logo.png')
+    update_row('Ryan', '2023-02-05 12:05:00', 'www.example.com', 'Food', 30, 'www.example.com/logo.png')
     update_row('Ryan', '2023-02-06 12:00:00', 'www.anothersite.com', 'Electricity', 40, 'www.anothersite.com/logo.png')
+    update_row('Ryan', '2023-02-06 12:10:00', 'www.anothersite.com', 'Electricity', 40, 'www.anothersite.com/logo.png')
     update_row('Ryan', '2023-02-07 12:00:00', 'www.yetanotherexample.com', 'Transportation', 60, 'www.yetanotherexample.com/logo.png')
     update_row('Ryan', '2023-02-08 12:00:00', 'www.example.com', 'Food', 25, 'www.example.com/logo.png')
+    update_row('Ryan', '2023-01-15 12:05:00', 'www.example.com', 'Food', 70, 'www.example.com/logo.png')
+    update_row('Ryan', '2023-01-05 12:05:00', 'www.example.com', 'Food', 10, 'www.example.com/logo.png')
+    update_row('Ryan', '2023-01-16 12:00:00', 'www.anothersite.com', 'Electricity', 20, 'www.anothersite.com/logo.png')
     update_row('Jim', '2023-02-09 12:00:00', 'www.anothersite.com', 'Electricity', 35, 'www.anothersite.com/logo.png')
     update_row('Jim', '2023-02-06 12:00:00', 'www.anothersite.com', 'Electricity', 40, 'www.anothersite.com/logo.png')
     update_row('Alex', '2023-02-07 12:00:00', 'www.yetanotherexample.com', 'Transportation', 60, 'www.yetanotherexample.com/logo.png')
@@ -159,4 +192,5 @@ if __name__ == '__main__':
     print(addRelation("Jim", "Jack", "local"))
     print(addRelation("Jim", "Ryan", "local"))
     print(leaderboard("Jim", "local"))
+    print(lastMonthData("Ryan"))
     

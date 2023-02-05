@@ -92,6 +92,7 @@ h3 {
     animation-duration: 0.5s;
     animation-delay: 0.7s;
     animation-fill-mode: forwards;
+    margin-bottom: 20px;
 }
 
 .categoryHeader {
@@ -141,7 +142,7 @@ h3 {
 .category:first-child > *:first-child { border-radius: 16px 16px 0px 0px; }
 .category:last-child > *:last-child { border-radius: 0px 0px 16px 16px; }
 .category:last-child.categoryCollapse > .categoryHeader { border-radius: 0px 0px 16px 16px; }
-.category:first-child:last-child *:first-child:last-child { border-radius: 16px 16px; }
+.category:first-child:last-child.categoryCollapse .categoryHeader { border-radius: 16px; }
 
 .categoryName {
     font-weight: 800;
@@ -340,4 +341,8 @@ input:active {
 
 .friendpopupfield {
     padding-left: 10px;
+}
+
+#lastmonth {
+    margin-top: 10px;
 }

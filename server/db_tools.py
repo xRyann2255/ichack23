@@ -23,14 +23,26 @@ CREATE TABLE IF NOT EXISTS {name} (
 );
 """
 )
-    db.execute(
-f"""
-INSERT INTO {name} (timestamp, website, category, co2_emissions, logo_url)
-VALUES ("{timestamp}", "{website}", "{category}", {co2_emissions}, "{logo_url}");
-"""
-)
+    day = timestamp.split()[0]
+    exists = db.execute(f"SELECT timestamp, co2_emissions FROM '{name}' WHERE website = '{website}'").fetchall()
+    exists = list(filter(lambda x: x[0].split()[0] == day, exists))
+    if len(exists) > 0:
+        newTotal = exists[0][1] + co2_emissions
+        db.execute(
+            f"""
+            UPDATE '{name}' SET co2_emissions='{newTotal}' WHERE timestamp='{exists[0][0]}'
+            """
+        )
+        db.commit()
+    else:
+        db.execute(
+    f"""
+    INSERT INTO {name} (timestamp, website, category, co2_emissions, logo_url)
+    VALUES ("{timestamp}", "{website}", "{category}", {co2_emissions}, "{logo_url}");
+    """
+    )
 
-    db.commit()
+        db.commit()
     
 def getCategories(name):
     categories = list( # SELECT DISTINCT ...
@@ -138,7 +150,9 @@ def leaderboard(name, type):
 if __name__ == '__main__':
     update_row('Ryan', datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'www.example.com', 'Transportation', 50, 'www.example.com/logo.png')
     update_row('Ryan', '2023-02-05 12:00:00', 'www.example.com', 'Food', 30, 'www.example.com/logo.png')
+    update_row('Ryan', '2023-02-05 12:05:00', 'www.example.com', 'Food', 30, 'www.example.com/logo.png')
     update_row('Ryan', '2023-02-06 12:00:00', 'www.anothersite.com', 'Electricity', 40, 'www.anothersite.com/logo.png')
+    update_row('Ryan', '2023-02-06 12:10:00', 'www.anothersite.com', 'Electricity', 40, 'www.anothersite.com/logo.png')
     update_row('Ryan', '2023-02-07 12:00:00', 'www.yetanotherexample.com', 'Transportation', 60, 'www.yetanotherexample.com/logo.png')
     update_row('Ryan', '2023-02-08 12:00:00', 'www.example.com', 'Food', 25, 'www.example.com/logo.png')
     update_row('Jim', '2023-02-09 12:00:00', 'www.anothersite.com', 'Electricity', 35, 'www.anothersite.com/logo.png')

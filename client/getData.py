@@ -4,7 +4,9 @@ from tqdm import tqdm
 HOME = pathlib.Path(__file__).parent.absolute()
 
 v4_ranges = {}
+v4_cpu_ranges = {}
 v6_ranges = {}
+v6_cpu_ranges = {}
 
 services = {"amazon": "aws", "google": "gcp", "azure": "azure"}
 ipv4_fmt = {"amazon": "ip_prefix", "google": "ipv4Prefix", "azure": "addressPrefix"}
@@ -23,8 +25,8 @@ def get_co2(service, scope):
         return None
 
 def get_cpu(service, scope):
-    fileEnd = f"cpu-provider_{service}-region_" + scope.replace("-", "_")
-    path = "../assets/cpu-emissions/{service}_lookup.json"
+    fileEnd = scope.replace("-", "_")
+    path = HOME / "../assets/cpu-emissions/{service}_lookup.json"
     if path.exists():
         with open(path, "r") as file:
             data = json.load(file)
@@ -41,6 +43,18 @@ for name in ["aws", "azure", "gcp"]:
             d[result["emission_factor"]["id"]] = result["co2e"]
     json.dump(d, open(HOME / f"../assets/cpu-emissions/{name}_lookup.json", "w"))        
 
+for name in ["amazon", "google"]:
+    with open(HOME / f"../assets/ip-ranges/{name}-ip-ranges.json", "r") as file:
+        data = json.load(file)
+        for prefix in tqdm(data["prefixes"] + data.get("ipv6_prefixes", [])):
+            if ipv4_fmt[name] in prefix:
+                v4_cpu_ranges[prefix[ipv4_fmt[name]]] = get_cpu(
+                    services[name], prefix[scope_fmt[services[name]]]
+                )
+            else:  # ipv6
+                v6_cpu_ranges[prefix[ipv6_fmt[name]]] = get_cpu(
+                    services[name], prefix[scope_fmt[services[name]]]
+                )
 
 for name in ["amazon", "google"]:
     with open(HOME / f"../assets/ip-ranges/{name}-ip-ranges.json", "r") as file:
@@ -137,4 +151,6 @@ with open(HOME / "../assets/ip-ranges/azure-ip-ranges.json", "r") as file:
         )
 
 json.dump(v4_ranges, open(HOME / "../assets/all-ranges.json", "w"))
+json.dump(v4_cpu_ranges, open(HOME / "../assets/all_cpu-ranges.json", "w"))
 json.dump(v6_ranges, open(HOME / "../assets/v6-ranges.json", "w"))
+json.dump(v6_cpu_ranges, open(HOME / "../assets/v6_cpu-ranges.json", "w"))

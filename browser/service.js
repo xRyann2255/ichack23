@@ -1,31 +1,50 @@
-chrome.runtime.onInstalled.addListener(() => {
-    const sentUrls = []
-    chrome.tabs.onUpdated.addListener((tabId, tab) => {
-        if (!tab.url) {
-            return;
-        }
-        console.log(chrome)
+let buffer = {};
+let ips = {};
 
-        // chrome.tabs.sendMessage(tabId, {
-        //     type: "NEW",
-        //     url: tab.url
-        // })
+chrome.webRequest.onCompleted.addListener((event) => {
+    try {
+        let host = new URL(event.url).host;
+        let parent = event.initiator ? new URL(event.initiator).host : host;
 
-        chrome.runtime.onMessage.addListener((data) => {
-            const index = data.url + data["page_view_time"]
-            if(sentUrls.indexOf(index) === -1) {
-                fetch("http://localhost:3001/example", {
-                    method: "post",
-                    body: JSON.stringify(data),
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json"
-                    },
-                    mode: "no-cors"
-                })
-                sentUrls.push(index)
-            }
-            return true;
-        })
-    })
-})
+        if (!(parent in ips)) ips[parent] = {};
+        if (!(host in ips[parent])) ips[parent][host] = {};
+
+        ips[parent][host] = event.ip;
+    } catch (e) {
+        console.log("ERR: Invalid URL either " + event.initiator + " or " + event.url);
+        console.log(event);
+    }
+}, {urls: ['<all_urls>']});
+
+chrome.runtime.onConnect.addListener(function (port) {
+    console.assert(port.name === "carbonara");
+    port.onMessage.addListener(function (msg) {
+        if (!(msg.host in ips)) console.log("ERR: Do not have IP for this connection: " + msg);
+
+        if (!(msg.parent in buffer)) buffer[msg.parent] = {};
+        if (!(msg.host in buffer[msg.parent])) buffer[msg.parent][msg.host] = {};
+
+        buffer[msg.parent][msg.host]["transfer_size"] = (buffer[msg.parent][msg.host]["transfer_size"] || 0) + msg.transfer_size;
+        buffer[msg.parent][msg.host]["duration"] = (buffer[msg.parent][msg.host]["duration"] || 0.0) + msg.duration;
+        buffer[msg.parent][msg.host]["ip"] = ips[msg.parent][msg.host];
+    });
+});
+
+function flushBuffer() {
+    fetch("http://localhost:3001/example", {
+        method: "post", body: JSON.stringify(buffer, function (key, val) {
+            if (val == null) return "N/A";
+            return val.toFixed ? Number(val.toFixed(3)) : val;
+        }), headers: {
+            "Content-Type": "application/json", "Accept": "application/json"
+        }, mode: "no-cors"
+    }).then(request => {
+        // console.log(request);
+        if (request.ok) buffer = {};
+    });
+}
+
+const interval = setInterval(() => {
+    console.log(buffer);
+    flushBuffer();
+}, 5 * 1000)

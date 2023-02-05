@@ -16,8 +16,6 @@
         "<all_urls>"
       ],
       "js": [
-        "ip.js",
-        "doh.min.js",
         "main.js"
       ],
       "run_at": "document_start"

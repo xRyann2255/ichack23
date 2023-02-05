@@ -202,6 +202,10 @@ def leaderboard(name, type):
 
 
 if __name__ == "__main__":
+    register("Jim", "abc")
+    register("Ryan", "abc")
+    register("Jack", "abc")
+    register("Alex", "abc")
     update_row(
         "Ryan",
         datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -322,10 +326,6 @@ if __name__ == "__main__":
         35,
         "www.anothersite.com/logo.png",
     )
-    register("Jim", "abc")
-    register("Ryan", "abc")
-    register("Jack", "abc")
-    register("Alex", "abc")
     print(addRelation("Ryan", "Jim", "friends"))
     print(addRelation("Ryan", "Alex", "friends"))
     print(addRelation("Ryan", "Jack", "friends"))

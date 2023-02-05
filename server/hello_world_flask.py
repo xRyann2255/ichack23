@@ -1,4 +1,5 @@
 import db_tools as tools
+import flask_cors
 import pytricia
 import dotenv, sqlite3, pathlib, requests, json
 from os import getenv
@@ -12,6 +13,7 @@ dotenv.load_dotenv(HOME/'.env')
 db = sqlite3.connect(HOME/'test.db')
 
 app = Flask(__name__)
+flask_cors.CORS(app)
 api = Api(app)
 
 pyt_4 = pytricia.PyTricia()
@@ -73,8 +75,9 @@ class Rest(Resource):
 
 class Auth(Resource):
     def get(self):
-        print('sanity go nyoom')
-        #It's safe I swear
+        res = tools.validate(request.args["username"],request.args["password"])
+        print(res)
+        return res, 200 if res else 403
     
     def post(self):
         #check user in db?

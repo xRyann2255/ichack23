@@ -8,7 +8,7 @@ from datetime import datetime
 
 HOME = pathlib.Path(__file__).parent.absolute()
 
-db = sqlite3.connect(HOME/'test.db')
+db = sqlite3.connect(HOME/'test.db',check_same_thread=False)
 
 def update_row(name, timestamp, website, category, co2_emissions, logo_url):
     db.execute(

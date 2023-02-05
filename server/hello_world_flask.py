@@ -66,6 +66,7 @@ print(avg_cpu6)
 
 def get_url_data(url: str):
     # print('started')
+    return (None, "Other")
     resp = requests.post(
         f"https://www.klazify.com/api/categorize?url=https://{url}",
         headers={

@@ -69,11 +69,18 @@ class Rest(Resource):
 
 class Auth(Resource):
     def get(self):
-        pass #It's safe I swear
+        print('sanity go nyoom')
+        #It's safe I swear
     
     def post(self):
         #check user in db?
+        print("Thanks for calling, I aws so lonely")
         tools.register(request.form["username"],request.form["password"])
+
+# @app.before_request
+# def before_req():
+#     print(request.method)
+
 
 api.add_resource(Auth, '/login')
 api.add_resource(Rest, '/api/<string:name>')

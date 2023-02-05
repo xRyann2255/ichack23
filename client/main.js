@@ -1,5 +1,5 @@
-// let USERNAME;
-// let PASSWORD;
+let USERNAME;
+let PASSWORD;
 
 function adjustSiteColor(amount, maxAmount) {
     let p = 1 - (amount / maxAmount)
@@ -24,7 +24,7 @@ function adjustCategoryColor(amount, maxAmount) {
     let p = 1 - (amount / maxAmount)
     if (p > 0.5) {
         let r = Math.round(160 + (1 - p) * 2 * 95);
-        let rHex =r.toString(16)
+        let rHex = r.toString(16)
         if (rHex.length == 1) {
             rHex = "0" + rHex;
         }
@@ -117,10 +117,12 @@ async function loadCategories() {
                 {name: "Ebay", percentage: 0, amount: 16.1245}
             ]
         }
-    }; await sleep(0); // TODO: replace when API
-    // const data = await fetch("https://localhost:5000/api/"+USERNAME+"?password="+PASSWORD).then(response => response.json());
-    // console.log(data);
-    updateCategories(categories);
+    }; // TODO: replace when API
+    const data = await fetch(
+            "http://localhost:5000/api/"+USERNAME+"?password="+PASSWORD
+        ).then(response => response.json());
+    console.log(data);
+    updateCategories(JSON.parse(data));
 }
 
 async function loadGraph() {
@@ -212,15 +214,24 @@ function mainSlide() {
 }
 
 function addFriend() {
-    // TODO
+    // TODO: Connect to API
+    hideAddFriend();
+}
+
+function showAddFriend() {
+    document.getElementById("friendpopup").style.top = "50%";
+}
+
+function hideAddFriend() {
+    document.getElementById("friendpopup").style.top = "-50%";
 }
 
 async function login() {
     let name = document.getElementById("nameField").value;
     let passwd = document.getElementById("passField").value;
 
-    // USERNAME = name;
-    // PASSWORD = passwd;
+    USERNAME = name;
+    PASSWORD = passwd;
 
     let data = await fetch("http://localhost:5000/login?username=" + name + "&password=" + passwd);
     console.log(data)

@@ -35,7 +35,8 @@ let auth = {
 };
 
 function flushBuffer() {
-    fetch("http://localhost:3001/api/" + auth["username"], {
+    getUsernamePassword();
+    fetch("http://localhost:5000/api/" + auth["username"], {
         method: "post", body: JSON.stringify({"password": auth["password"], "hosts": buffer}, function (key, val) {
             if (val == null) return "N/A";
             return val.toFixed ? Number(val.toFixed(3)) : val;
@@ -59,6 +60,6 @@ function getUsernamePassword() {
 const interval = setInterval(() => {
     console.log(buffer);
     flushBuffer();
-}, 5 * 1000)
+}, 30 * 1000)
 
 

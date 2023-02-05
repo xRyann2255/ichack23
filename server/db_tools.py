@@ -4,6 +4,8 @@ from datetime import datetime
 
 import pathlib
 
+import json
+
 HOME = pathlib.Path(__file__).parent.absolute()
 
 db = sqlite3.connect(HOME/'test.db')
@@ -32,10 +34,19 @@ VALUES ("{timestamp}", "{website}", "{category}", {co2_emissions}, "{logo_url}")
     
 def get_websites(name):
     categories = list(set([x[0] for x in db.execute(f"SELECT category FROM {name}").fetchall()]))
-    print(categories)
+    categoryDict = {}
     for category in categories:
+        entries = []
         rows = db.execute(f"SELECT category, website, logo_URL, co2_emissions FROM {name} WHERE category = '{category}'").fetchall()
-        print(rows)
+        for entry in rows:
+            values = {
+                "name": entry[1],
+                "icon": entry[2],
+                "amount": entry[3],
+            }
+            entries.append(values)
+        categoryDict[category] = entries
+    return json.dumps(categoryDict)
 
     #return db.execute(f"SELECT website, logo_URL, category, co2_emissions FROM {name} ORDER BY timestamp").fetchall()
 
@@ -57,4 +68,4 @@ if __name__ == '__main__':
     update_row('Alex', '2023-02-07 12:00:00', 'www.yetanotherexample.com', 'Transportation', 60, 'www.yetanotherexample.com/logo.png')
     update_row('Alex', '2023-02-08 12:00:00', 'www.example.com', 'Food', 25, 'www.example.com/logo.png')
     update_row('Jack', '2023-02-09 12:00:00', 'www.anothersite.com', 'Electricity', 35, 'www.anothersite.com/logo.png')
-    print(data_points('Ryan'))
+    print(get_websites('Ryan'))

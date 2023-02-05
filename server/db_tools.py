@@ -12,21 +12,9 @@ db = sqlite3.connect(HOME / "test.db", check_same_thread=False)
 
 
 def update_row(name, timestamp, website, category, co2_emissions, logo_url):
-    db.execute(
-        f"""
-CREATE TABLE IF NOT EXISTS {name} (
-  timestamp TIMESTAMP NOT NULL,
-  website VARCHAR(255) NOT NULL,
-  category VARCHAR(255) NOT NULL,
-  co2_emissions FLOAT NOT NULL,
-  logo_url VARCHAR(255) NOT NULL,
-  PRIMARY KEY (timestamp)
-);
-"""
-    )
     day = timestamp.split()[0]
     exists = db.execute(
-        f"SELECT timestamp, co2_emissions FROM '{name}' WHERE website = '{website}'"
+        f"SELECT timestamp, co2_emissions FROM {name} WHERE website = '{website}'"
     ).fetchall()
     exists = list(filter(lambda x: x[0].split()[0] == day, exists))
     if len(exists) > 0:
@@ -108,6 +96,19 @@ def register(name, password):
     salt = "".join(random.choice(letters) for i in range(20))
     dbPassword = password + salt
     hash = hashlib.sha256(dbPassword.encode()).hexdigest()
+
+    db.execute(
+        f"""
+CREATE TABLE IF NOT EXISTS {name} (
+  timestamp TIMESTAMP NOT NULL,
+  website VARCHAR(255) NOT NULL,
+  category VARCHAR(255) NOT NULL,
+  co2_emissions FLOAT NOT NULL,
+  logo_url VARCHAR(255) NOT NULL,
+  PRIMARY KEY (timestamp)
+);
+"""
+    )
 
     db.execute(
         """

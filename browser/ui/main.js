@@ -196,7 +196,12 @@ async function loadLeaderboard() {
     // ];
     // add type switch, as additional arg "type" = local/friends
     let data = await fetch("http://35.242.181.37:5000/leaderboard/"+USERNAME+"?password="+PASSWORD).then(response => response.json());
-    console.log("banana"+data);
+
+    if (!data)  {
+        alert("Could not load leaderboard!");
+        return;
+    }
+
     const players = JSON.parse(data);
 
     let leaderboardElement = document.getElementById("leaderboard");
@@ -259,7 +264,6 @@ async function login() {
 
     let data = await fetch("http://35.242.181.37:5000/login?username=" + name + "&password=" + passwd);
 
-    // TODO: connect to API
     if (data.status === 200) {
         loadCategories();
         loadGraph();
@@ -279,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     let addFriendButton = document.getElementById('addFriendButton');
     addFriendButton.addEventListener('click', function() {
-        showAddFriend();
+        addFriend();
     });
     let closeAddFriend = document.getElementById('closeAddFriend');
     closeAddFriend.addEventListener('click', function() {

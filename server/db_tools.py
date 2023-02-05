@@ -85,14 +85,20 @@ def register(name, password):
 
 
 # Run on login
-def login(name, password):
+def validate(name, password):
     salt = db.execute("SELECT salt FROM users WHERE name=?", (name,)).fetchall()
     if len(salt) == 0:
         return False
     hash = hashlib.sha256((password + salt[0][0]).encode()).hexdigest()
     result = db.execute("SELECT name, hash FROM users WHERE name=? AND hash=?", (name, hash)).fetchall()
     if len(result) > 0:
-        return json.dumps([getCategories(name), loadGraph(name)])
+        return True
+    else:
+        return False
+    
+def login(name, password):
+    if validate(name, password):
+        return [getCategories(name), loadGraph(name)]
     else:
         return False
 
@@ -107,8 +113,3 @@ if __name__ == '__main__':
     update_row('Alex', '2023-02-07 12:00:00', 'www.yetanotherexample.com', 'Transportation', 60, 'www.yetanotherexample.com/logo.png')
     update_row('Alex', '2023-02-08 12:00:00', 'www.example.com', 'Food', 25, 'www.example.com/logo.png')
     update_row('Jack', '2023-02-09 12:00:00', 'www.anothersite.com', 'Electricity', 35, 'www.anothersite.com/logo.png')
-    print(register("admin", "superSECUREpassWORD"))
-    print(login("Ryan", "a"))
-    print(register("Ryan", "password123"))
-    print(login("Ryan", "password123"))
-    #print(loadGraph('Ryan'))

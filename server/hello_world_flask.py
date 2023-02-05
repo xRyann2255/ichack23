@@ -103,4 +103,4 @@ api.add_resource(Auth, '/login')
 api.add_resource(Rest, '/api/<string:name>')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

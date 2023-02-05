@@ -212,7 +212,7 @@ if __name__ == "__main__":
         "instagram.com",
         "Social media",
         51.23,
-        "www.instagram.com/favicon.ico",
+        "https://static.cdninstagram.com/rsrc.php/v3/yG/r/De-Dwpd5CHc.png",
     )
     update_row(
         "Ryan",
@@ -220,7 +220,7 @@ if __name__ == "__main__":
         "waitrose.com",
         "Food",
         1.21,
-        "www.waitrose.com/favicon.ico",
+        "https://d1tgnqeqj06hpw.cloudfront.net/static/version5/images/static/apple-touch-icon-114x114-precomposed.png",
     )
     update_row(
         "Ryan",
@@ -228,7 +228,7 @@ if __name__ == "__main__":
         "github.com",
         "Technology",
         12.7,
-        "www.github.com/favicon.ico",
+        "https://github.githubassets.com/images/modules/open_graph/github-logo.png",
     )
     update_row(
         "Ryan",
@@ -236,7 +236,7 @@ if __name__ == "__main__":
         "adventofcode.com",
         "Technology",
         0.22,
-        "www.adventofcode.com/favicon.ico",
+        "https://adventofcode.com/favicon.png",
     )
     update_row(
         "Ryan",
@@ -244,7 +244,7 @@ if __name__ == "__main__":
         "stackoverflow.com",
         "Technology",
         7.2,
-        "www.stackoverflow.com/favicon.ico",
+        "https://cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon.png",
     )
     update_row(
         "Ryan",
@@ -252,7 +252,7 @@ if __name__ == "__main__":
         "reddit.com",
         "Social media",
         3.4,
-        "www.reddit.com/favicon.ico",
+        "https://www.redditstatic.com/desktop2x/img/favicon/apple-icon-180x180.png",
     )
     update_row(
         "Ryan",
@@ -260,29 +260,29 @@ if __name__ == "__main__":
         "cisco.com",
         "Technology",
         17.8,
-        "www.cisco.com/favicon.ico",
+        "https://www.cisco.com/web/fw/i/logo-open-graph.gif",
     )
     update_row(
         "Ryan",
         "2023-01-15 12:05:00",
-        "www.example.com",
-        "Food",
-        70,
-        "www.example.com/logo.png",
+        "twitter.com",
+        "Social media",
+        34.0,
+        "https://abs.twimg.com/responsive-web/client-web/icon-ios.b1fc727a.png",
     )
     update_row(
         "Ryan",
         "2023-01-05 12:05:00",
-        "www.example.com",
+        "deliveroo.com",
         "Food",
-        10,
-        "www.example.com/logo.png",
+        10.3,
+        "https://cwa.roocdn.com/_next/static/apple-touch-icon.870581c7.png",
     )
     update_row(
         "Ryan",
         "2023-01-16 12:00:00",
         "www.anothersite.com",
-        "Electricity",
+        "Other",
         20,
         "www.anothersite.com/logo.png",
     )
@@ -290,7 +290,7 @@ if __name__ == "__main__":
         "Jim",
         "2023-02-09 12:00:00",
         "www.anothersite.com",
-        "Electricity",
+        "Other",
         35,
         "www.anothersite.com/logo.png",
     )
@@ -298,7 +298,7 @@ if __name__ == "__main__":
         "Jim",
         "2023-02-06 12:00:00",
         "www.anothersite.com",
-        "Electricity",
+        "Other",
         40,
         "www.anothersite.com/logo.png",
     )
@@ -306,28 +306,19 @@ if __name__ == "__main__":
         "Alex",
         "2023-02-07 12:00:00",
         "www.yetanotherexample.com",
-        "Transportation",
+        "Other",
         60,
         "www.yetanotherexample.com/logo.png",
-    )
-    update_row(
-        "Alex",
-        "2023-02-08 12:00:00",
-        "www.example.com",
-        "Food",
-        25,
-        "www.example.com/logo.png",
     )
     update_row(
         "Jack",
         "2023-02-09 12:00:00",
         "www.anothersite.com",
-        "Electricity",
+        "Other",
         35,
         "www.anothersite.com/logo.png",
     )
     print(addRelation("Ryan", "Jim", "friends"))
-    print(addRelation("Ryan", "Alex", "friends"))
     print(addRelation("Ryan", "Jack", "friends"))
     print(leaderboard("Ryan", "friends"))
     print(addRelation("Jim", "Alex", "local"))

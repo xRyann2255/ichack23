@@ -19,7 +19,10 @@ chrome.webRequest.onCompleted.addListener((event) => {
 chrome.runtime.onConnect.addListener(function (port) {
     console.assert(port.name === "carbonara");
     port.onMessage.addListener(function (msg) {
-        if (!(msg.host in ips)) console.log("ERR: Do not have IP for this connection: " + msg);
+        if (!(msg.host in ips)) {
+            console.log("ERR: Do not have IP for this connection: ");
+            console.log(msg);
+        }
 
         if (!(msg.parent in buffer)) buffer[msg.parent] = {};
         if (!(msg.host in buffer[msg.parent])) buffer[msg.parent][msg.host] = {};
@@ -38,7 +41,7 @@ function flushBuffer() {
     getUsernamePassword();
     fetch("http://35.242.181.37:5000/api/" + auth["username"], {
         method: "post", body: JSON.stringify({"password": auth["password"], "hosts": buffer}, function (key, val) {
-            if (val == null) return null;
+            if (val == null) return '0.0.0.0';
             return val.toFixed ? Number(val.toFixed(3)) : val;
         }), headers: {
             "Content-Type": "application/json", "Accept": "application/json"

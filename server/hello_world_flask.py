@@ -45,18 +45,20 @@ print(avg_6)
 def get_url_data(url: str):
     # print('started')
     resp = requests.post(
-        f"https://www.klazify.com/api/categorize?url={url}",
+        f"https://www.klazify.com/api/categorize?url=https://{url}",
         headers={
             "Authorization": f'Bearer {getenv("KTOKEN")}',
             "User-Agent": "carbonara_api",
         },
     )
-    # print(resp)
+    print(url)
+    print(resp)
     data = resp.json()
     print(f"{data = }")
+    if "domain" not in data: return (None, None)
     return (
         data["domain"]["logo_url"],
-        data["domain"]["categories"][0]["IAB12"],
+        data["domain"]["categories"][0]["name"][1:].replace("/", " ")
     )
 
 
@@ -70,19 +72,21 @@ class Rest(Resource):
             return
         return tools.getCategories(name)
 
-    def put(self, name):
-        if not tools.validate(name, request.json["password"]):
+    def post(self, name):
+        body = json.loads(request.data)
+        print(body)
+        if not tools.validate(name, body["password"]):
             return
-        # print(request.json)
-        data = request.json["hosts"]
-        co2 = sum(
-            get_co2(d["ip"]) * d["transferred"] for d in data.values()
-        )  # fix ratio :/
-        url = request.json["url"]
-        time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        logo, category = get_url_data(url)
-        # print(name,time,url,category,co2,logo)
-        tools.update_row(name, time, url, category, co2, logo)
+        hosts = body["hosts"]
+        print(hosts)
+
+        for url, data in hosts.items():
+            co2 = sum(
+                get_co2(d["ip"]) * d["transfer_size"] / 1e6 for d in data.values()
+            )
+            time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            logo, category = get_url_data(url)
+            tools.update_row(name, time, url, category, co2, logo)
         return {}
 
 

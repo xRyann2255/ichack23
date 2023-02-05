@@ -1,14 +1,10 @@
 import sqlite3
-
-from datetime import datetime
-
 import pathlib
-
 import json
-
 import random
-
 import string
+import hashlib
+from datetime import datetime
 
 HOME = pathlib.Path(__file__).parent.absolute()
 
@@ -63,9 +59,6 @@ def loadGraph(name):
     for i, (time, value) in enumerate(points[1:]):
         points[i+1] = (time, value + points[i][1])
     return json.dumps(points)
-
-import hashlib
-import sqlite3
 
 def register(name, password):
     letters = string.ascii_lowercase

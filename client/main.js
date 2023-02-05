@@ -212,7 +212,16 @@ function mainSlide() {
 }
 
 function addFriend() {
-    // TODO
+    // TODO: Connect to API
+    hideAddFriend();
+}
+
+function showAddFriend() {
+    document.getElementById("friendpopup").style.top = "50%";
+}
+
+function hideAddFriend() {
+    document.getElementById("friendpopup").style.top = "-50%";
 }
 
 async function login() {

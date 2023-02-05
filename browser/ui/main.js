@@ -85,7 +85,7 @@ function updateCategories(categories) {
 
             siteElement.getElementsByClassName("siteIcon")[0].src = site.icon;
             siteElement.getElementsByClassName("siteName")[0].innerHTML = site.name;
-            siteElement.getElementsByClassName("siteAmount")[0].innerHTML = Math.round(site.amount * 100) / 100 + " kg";
+            siteElement.getElementsByClassName("siteAmount")[0].innerHTML = Math.round(site.amount * 100) / 100 + " g";
             siteElement.getElementsByClassName("sitePercent")[0].innerHTML = "(" + Math.round(site.percentage * 100) / 100 + "%)";
 
             siteElement.style.backgroundColor = adjustSiteColor(site.amount, maxSiteAmount);
@@ -96,7 +96,7 @@ function updateCategories(categories) {
         let categoryHeader = categoryElement.getElementsByClassName("categoryHeader")[0];
 
         categoryHeader.getElementsByClassName("categoryName")[0].innerHTML = key;
-        categoryHeader.getElementsByClassName("categoryAmount")[0].innerHTML = Math.round(category.amount * 100) / 100 + " kg";
+        categoryHeader.getElementsByClassName("categoryAmount")[0].innerHTML = Math.round(category.amount * 100) / 100 + " g";
         categoryHeader.getElementsByClassName("categoryPercent")[0].innerHTML = "(" + Math.round(category.percentage * 100) / 100 + "%)";
         categoryHeader.style.backgroundColor = adjustCategoryColor(category.amount, maxCategoryAmount);
 
@@ -107,7 +107,7 @@ function updateCategories(categories) {
         });
     }
 
-    document.getElementById("statsKg").innerHTML = Math.round(total * 100) / 100 + " kg"
+    document.getElementById("statsKg").innerHTML = Math.round(total * 100) / 100 + " g"
 }
 
 

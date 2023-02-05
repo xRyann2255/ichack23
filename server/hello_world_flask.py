@@ -108,9 +108,9 @@ class Rest(Resource):
 
         for url, data in hosts.items():
             co2 = sum(
-                get_co2(d["ip"]) * d["transfer_size"] / 1e6 for d in data.values()
+                get_co2(d["ip"]) * d["transfer_size"] / 1e3 for d in data.values()
             ) + sum(
-                get_cpu(d["ip"]) * d["duration"] / 3.6e6 for d in data.values()
+                get_cpu(d["ip"]) * d["duration"] / 3.6e3 for d in data.values()
             )
             
             time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

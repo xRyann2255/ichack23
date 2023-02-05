@@ -49,6 +49,7 @@ def getCategories(name):
             }
             entries.append(values)
         categoryDict[category] = entries
+    categoryDict = {k:{"sites":v} for k,v in categoryDict.items()}
     return json.dumps(categoryDict)
 
     #return db.execute(f"SELECT website, logo_URL, category, co2_emissions FROM {name} ORDER BY timestamp").fetchall()

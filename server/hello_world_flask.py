@@ -40,7 +40,7 @@ def get_url_data(url:str):
 
 class Rest(Resource):
     def get(self, name):
-        return {"":tools.get_websites(name)}
+        return tools.get_websites(name)
 
     def put(self, name):
         print(request.json)

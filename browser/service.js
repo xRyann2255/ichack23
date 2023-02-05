@@ -31,14 +31,12 @@ chrome.runtime.onConnect.addListener(function (port) {
 });
 
 let auth = {
-    "username": "Ryan",
-    "password": "abc"
+    "username": "Ryan", "password": "abc"
 };
 
 function flushBuffer() {
-    buffer["auth"] = auth;
-    fetch("http://localhost:3001/example", {
-        method: "post", body: JSON.stringify(buffer, function (key, val) {
+    fetch("http://localhost:3001/api/" + auth["username"], {
+        method: "post", body: JSON.stringify({"password": auth["password"], "hosts": buffer}, function (key, val) {
             if (val == null) return "N/A";
             return val.toFixed ? Number(val.toFixed(3)) : val;
         }), headers: {

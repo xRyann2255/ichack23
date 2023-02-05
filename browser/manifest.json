@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "IC Hack 23",
+  "version": "1.0",
+  "permissions": [
+    "history"
+  ],
+  "background": {
+    "scripts": ["history.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["main.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

@@ -58,6 +58,7 @@ class Rest(Resource):
         return tools.get_websites(name)
 
     def put(self, name):
+        
         print(request.json)
         data = request.json["hosts"]
         co2 = sum(get_co2(d["ip"])*d["transferred"] for d in data.values()) # fix ratio :/

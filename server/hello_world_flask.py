@@ -57,7 +57,7 @@ def get_co2(ip:str):
 
 class Rest(Resource):
     def get(self, name):
-        if not tools.validate(request.form["username"],request.form["password"]):
+        if not tools.validate(name,request.args["password"]):
             return
         return tools.getCategories(name)
 
@@ -77,7 +77,7 @@ class Auth(Resource):
     def get(self):
         res = tools.validate(request.args["username"],request.args["password"])
         print(res)
-        return res, 200 if res else 403
+        return res, 200 if res else 403 # an utter crime
     
     def post(self):
         #check user in db?

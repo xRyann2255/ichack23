@@ -22,6 +22,25 @@ def get_co2(service, scope):
     else:
         return None
 
+def get_cpu(service, scope):
+    fileEnd = f"cpu-provider_{service}-region_" + scope.replace("-", "_")
+    path = "../assets/cpu-emissions/{service}_lookup.json"
+    if path.exists():
+        with open(path, "r") as file:
+            data = json.load(file)
+            return data[fileEnd]
+    else:
+        return None
+        
+
+for name in ["aws", "azure", "gcp"]:
+    d = {}
+    with open(HOME / f"../assets/cpu-emissions/{name}_cpu.json", "r") as file:
+        data = json.load(file)
+        for result in data["results"]:
+            d[result["emission_factor"]["id"]] = result["co2e"]
+    json.dump(d, open(HOME / f"../assets/cpu-emissions/{name}_lookup.json", "w"))        
+
 
 for name in ["amazon", "google"]:
     with open(HOME / f"../assets/ip-ranges/{name}-ip-ranges.json", "r") as file:

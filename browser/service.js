@@ -44,8 +44,13 @@ function flushBuffer() {
             "Content-Type": "application/json", "Accept": "application/json"
         }, mode: "no-cors"
     }).then(request => {
-        // console.log(request);
-        if (request.ok) buffer = {};
+        if (request.ok) {
+            console.log("Successfully flushed buffer :) ");
+            buffer = {};
+        } else {
+            console.log(request);
+            console.log("Unsuccessful");
+        }
     });
 }
 

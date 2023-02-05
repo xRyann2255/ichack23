@@ -1,10 +1,10 @@
 import sqlite3
-
-from datetime import datetime
-
 import pathlib
-
 import json
+import random
+import string
+import hashlib
+from datetime import datetime
 
 HOME = pathlib.Path(__file__).parent.absolute()
 
@@ -59,6 +59,30 @@ def loadGraph(name):
     for i, (time, value) in enumerate(points[1:]):
         points[i+1] = (time, value + points[i][1])
     return json.dumps(points)
+
+def register(name, password):
+    letters = string.ascii_lowercase
+    salt = ''.join(random.choice(letters) for i in range(20))
+    dbPassword = password+salt
+    hash = hashlib.sha256(dbPassword.encode()).hexdigest()
+
+    db.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            name TEXT PRIMARY KEY,
+            hash TEXT NOT NULL,
+            salt TEXT NOT NULL
+        )
+    """)
+
+    # Insert the new user into the users table
+    db.execute("""
+        INSERT INTO users (name, hash, salt)
+        VALUES (?, ?, ?)
+    """, (name, hash, salt))
+
+    # Commit the changes and close the database connection
+    db.commit()
+
 
 # Run on login
 def login(name):

@@ -108,9 +108,6 @@ function toggleCollapse(element) {
 }
 
 function onLoad() {
-    loadCategories();
-    loadGraph();
-    loadLeaderboard();
 }
 
 async function loadCategories() {
@@ -220,6 +217,20 @@ function mainSlide() {
 
 function addFriend() {
     // TODO
+}
+
+function login() {
+    let name = document.getElementById("nameField").value;
+    // TODO: connect to api
+    loadCategories();
+    loadGraph();
+    loadLeaderboard();
+    mainSlide();
+}
+
+function register() {
+    let name = document.getElementById("nameField").value;
+    // TODO: connect to api
 }
 
 window.onload = onLoad;

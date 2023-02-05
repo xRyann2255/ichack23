@@ -75,6 +75,9 @@ class Rest(Resource):
         tools.update_row(name,time,url,category,co2,logo)
         return {}
 
+# class Leaderboard(Resource):
+
+
 class Auth(Resource):
     def get(self):
         res = tools.validate(request.args["username"],request.args["password"])

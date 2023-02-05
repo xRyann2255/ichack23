@@ -146,7 +146,7 @@ async function loadGraph() {
 
     const xValues = [];
     const yValues = [];
-    for (const carbonTime of carbonOverTime) {
+    for (const carbonTime of JSON.parse(data)) {
         xValues.push(carbonTime[0]);
         yValues.push(carbonTime[1]);
     }
@@ -273,6 +273,27 @@ document.addEventListener('DOMContentLoaded', function() {
     registerButton.addEventListener('click', function() {
         register();
     });
+    let addFriendButton = document.getElementById('addFriendButton');
+    addFriendButton.addEventListener('click', function() {
+        showAddFriend();
+    });
+    let closeAddFriend = document.getElementById('closeAddFriend');
+    closeAddFriend.addEventListener('click', function() {
+        hideAddFriend();
+    });
+    let leaderboardButton = document.getElementById('leaderboardButton');
+    leaderboardButton.addEventListener('click', function() {
+        leaderboardSlide();
+    });
+    let mainScreenButton = document.getElementById('mainScreenButton');
+    mainScreenButton.addEventListener('click', function() {
+        mainSlide();
+    });
+    let addFriend = document.getElementById('addFriend');
+    addFriend.addEventListener('click', function() {
+        showAddFriend();
+    });
+
 });
 
 async function register() {

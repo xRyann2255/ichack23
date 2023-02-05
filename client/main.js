@@ -221,16 +221,27 @@ function addFriend() {
 
 function login() {
     let name = document.getElementById("nameField").value;
-    // TODO: connect to api
+    let passwd = document.getElementById("passField").value;
+
+    // TODO: connect to API
+
     loadCategories();
     loadGraph();
     loadLeaderboard();
     mainSlide();
 }
 
-function register() {
+async function register() {
     let name = document.getElementById("nameField").value;
-    // TODO: connect to api
+    let passwd = document.getElementById("passField").value;
+    let data = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        body: JSON.stringify({
+            username: name,
+            password: passwd
+        })
+    });
+    login();
 }
 
 window.onload = onLoad;

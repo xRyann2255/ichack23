@@ -33,8 +33,15 @@ VALUES ("{timestamp}", "{website}", "{category}", {co2_emissions}, "{logo_url}")
     db.commit()
     
 def get_websites(name):
+<<<<<<< HEAD
     categories = list(set([x[0] for x in db.execute(f"SELECT category FROM {name}").fetchall()]))
     categoryDict = {}
+=======
+    categories = list( # SELECT DISTINCT ...
+        {x[0] for x in db.execute(f"SELECT category FROM {name}").fetchall()}
+    )
+    print(categories)
+>>>>>>> a380365e4390e5184c82e35875696034a76c1ee7
     for category in categories:
         entries = []
         rows = db.execute(f"SELECT category, website, logo_URL, co2_emissions FROM {name} WHERE category = '{category}'").fetchall()
@@ -49,6 +56,10 @@ def get_websites(name):
     return json.dumps(categoryDict)
 
     #return db.execute(f"SELECT website, logo_URL, category, co2_emissions FROM {name} ORDER BY timestamp").fetchall()
+
+def data_over_time(name):
+    data = db.execute(f"SELECT timestamp, co2_emissions FROM {name} ORDER BY timestamp").fetchall()
+    return sorted(data)
 
 def data_points(name):
     points = db.execute(f"SELECT timestamp, co2_emissions FROM {name} ORDER BY timestamp").fetchall()

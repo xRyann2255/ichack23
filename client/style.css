@@ -1,0 +1,283 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Hanken Grotesk";
+}
+
+#mainSlide {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+#slider {
+    position: relative;
+    left: 0%;
+    transition: left 0.5s;
+}
+
+#stats {
+    width: 100%;
+    padding: 20px;
+}
+
+h2, h1, h3, h4 {
+    text-align: center;
+    font-weight: 800;
+}
+
+h1 {
+    font-size: 48pt;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-duration: 0.5s;
+    animation-delay: 0.35s;
+    animation-fill-mode: forwards;
+}
+
+h4 {
+    margin-top: 20px;
+    font-size: 36pt;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+h2 {
+    font-size: 16pt;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+h3 {
+    font-size: 16pt;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-duration: 0.6s;
+    animation-fill-mode: forwards;
+}
+
+#categories {
+    padding: 20px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 720px;
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-duration: 0.5s;
+    animation-delay: 0.7s;
+    animation-fill-mode: forwards;
+}
+
+.categoryHeader {
+    padding: 15px 25px;
+    font-size: 20px;
+    display: flex;
+    background-color: #ffa0a0;
+    transition: border-radius 0.2s;
+}
+
+.categoryCollapse .site {
+    height: 0;
+    padding: 0px 25px;
+}
+
+.site {
+    overflow: hidden;
+    padding: 0px 25px;
+    font-size: 20px;
+    height: 60px;
+    display: flex;
+    background-color: #ffc0c0;
+    align-items: center;
+    transition: padding 0.2s, height 0.2s, border-radius 0.2s;
+}
+
+.siteIcon {
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
+    border-radius: 8px;
+}
+
+.flexElement {
+    flex-grow: 1;
+}
+
+.category {
+    transition: transform 0.2s;
+}
+
+.category:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+.category:first-child > *:first-child { border-radius: 16px 16px 0px 0px; }
+.category:last-child > *:last-child { border-radius: 0px 0px 16px 16px; }
+.category:last-child.categoryCollapse > .categoryHeader { border-radius: 0px 0px 16px 16px; }
+.category:first-child:last-child *:first-child:last-child { border-radius: 16px 16px; }
+
+.categoryName {
+    font-weight: 800;
+}
+
+.categoryPercent, .sitePercent {
+    width: 72px;
+    text-align: right;
+}
+
+#templates {
+    display: none;
+}
+
+#carbonPerTime {
+    position: relative;
+    max-width: 680px;
+    max-height: 520px;
+    left: 50%;
+    padding: 20px;
+    transform: translateX(-50%);
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-duration: 0.5s;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%);
+    }
+}
+
+#leaderboardButton {
+    margin-top: 30px;
+    padding: 12px 16px;
+    background-color: #f0a000;
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16pt;
+    font-weight: 800;
+    border-radius: 16px;
+    color: white;
+    transition: transform 0.2s;
+}
+
+.buttonBar {
+    display: flex;
+    justify-content: center;
+}
+
+#mainScreenButton, #addFriend {
+    margin: 30px 20px;
+    padding: 12px 16px;
+    background-color: #f0a000;
+    display: inline-block;
+    font-size: 16pt;
+    font-weight: 800;
+    border-radius: 16px;
+    color: white;
+    transition: transform 0.2s;
+}
+
+#mainScreenButton {
+    background-color: #f0a000;
+}
+
+#addFriend {
+    background-color: #00c060;
+}
+
+#leaderboardButton:hover {
+    cursor: pointer;
+    transform: translateX(-50%) scale(1.05);
+}
+
+#mainScreenButton:hover, #addFriend:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+#slider.slide2 {
+    left: -100%;
+}
+
+#leaderboardSlide {
+    padding: 20px;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    width: 100%;
+}
+
+#leaderboard {
+    width: 640px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.leaderboard-row, .leaderboard-header {
+    height: 50px;
+    padding: 0px 10px;
+    display: flex;
+    align-items: center;
+}
+
+h5 {
+    font-size: 20px;
+    margin: 0px 10px;
+}
+
+h6 {
+    font-weight: 500;
+    font-size: 20px;
+    margin: 0px 10px;
+}
+
+.leaderboard-row:nth-child(odd) {
+    background-color: #fff0c0;
+}
+
+.leaderboard-row:nth-child(even) {
+    background-color: #fff8e0;
+}
+
+.leaderboard-header {
+    border-radius: 16px 16px 0px 0px;
+}
+
+.leaderboard-row:last-child {
+    border-radius: 0px 0px 16px 16px;
+}
+
+.leaderboard-header {
+    background-color: #ffe080;
+}

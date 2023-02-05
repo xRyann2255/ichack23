@@ -1,0 +1,679 @@
+{
+  "results": [
+    {
+      "co2e": 0.002167,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_af_south_1",
+        "uuid": "83adc178-f188-4213-92cb-07ff4075a3f8",
+        "id": "cpu-provider_aws-region_af_south_1",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "ZA-CPT",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.002167,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0017084,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_ap_east_1",
+        "uuid": "04ef7056-9e9c-4950-beb5-475e6a57901d",
+        "id": "cpu-provider_aws-region_ap_east_1",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "HK-HKG",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0017084,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0011208,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_ap_northeast_1",
+        "uuid": "2eac6717-25b7-4de2-99a6-03431f7ef256",
+        "id": "cpu-provider_aws-region_ap_northeast_1",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "JP-TYO",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0011208,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.001,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_ap_northeast_2",
+        "uuid": "e80b3346-8ce0-4f45-a390-d198cfdccb25",
+        "id": "cpu-provider_aws-region_ap_northeast_2",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "KR-SEL",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.001,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0011208,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_ap_northeast_3",
+        "uuid": "2919cbdf-f906-4b0b-b03e-cf767fb709ec",
+        "id": "cpu-provider_aws-region_ap_northeast_3",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "JP-OSA",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0011208,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0017041,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_ap_south_1",
+        "uuid": "92f28a62-ab60-494c-b63d-ae6290b9137f",
+        "id": "cpu-provider_aws-region_ap_south_1",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "IN-BOM",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0017041,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0009817,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_ap_southeast_1",
+        "uuid": "c0599e71-b1c7-4fcb-9f8d-71b03d60098f",
+        "id": "cpu-provider_aws-region_ap_southeast_1",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "SG-SIN",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0009817,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0018287,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_ap_southeast_2",
+        "uuid": "47b7a45d-27d4-4db3-9d53-61aa5228fb31",
+        "id": "cpu-provider_aws-region_ap_southeast_2",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "AU-SYD",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0018287,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0002887,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_ca_central_1",
+        "uuid": "65918059-0ee5-45aa-9679-584bcf965bc8",
+        "id": "cpu-provider_aws-region_ca_central_1",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "CA-MTR",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0002887,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0012931,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_cn_north_1",
+        "uuid": "994e182e-f098-40b5-8903-f932066bc2a4",
+        "id": "cpu-provider_aws-region_cn_north_1",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "CN-BJS",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0012931,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0012931,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_cn_northwest_1",
+        "uuid": "1f060f41-6463-44a3-807c-d71170ed7f16",
+        "id": "cpu-provider_aws-region_cn_northwest_1",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "CN-NX",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0012931,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0007483,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_eu_central_1",
+        "uuid": "5ec840af-63dc-4eb7-b3a7-a6dddca24eb1",
+        "id": "cpu-provider_aws-region_eu_central_1",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "DE-FRA",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0007483,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0000212,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_eu_north_1",
+        "uuid": "1cb37b8c-24d3-4034-b904-0eaf375398c6",
+        "id": "cpu-provider_aws-region_eu_north_1",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "SE-STO",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0000212,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0005135,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_eu_south_1",
+        "uuid": "71cdd3cd-1b8f-4cc0-87f6-76a1f52a0c5d",
+        "id": "cpu-provider_aws-region_eu_south_1",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "IT-MIL",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0005135,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0006704,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_eu_west_1",
+        "uuid": "f8ae265e-5813-4569-b7d6-f5f9b96b7321",
+        "id": "cpu-provider_aws-region_eu_west_1",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "IE-DUB",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0006704,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0005414,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_eu_west_2",
+        "uuid": "98cac211-5799-4501-a0f4-13596ee970c0",
+        "id": "cpu-provider_aws-region_eu_west_2",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "GB-LON",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0005414,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.000123,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_eu_west_3",
+        "uuid": "2e4ae9be-e38e-4512-8d4c-aace2c504e8b",
+        "id": "cpu-provider_aws-region_eu_west_3",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "FR-PAR",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.000123,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0012173,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_me_south_1",
+        "uuid": "897d21b6-4f3a-4fb7-b991-95221e97aebe",
+        "id": "cpu-provider_aws-region_me_south_1",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "BH-AMH",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0012173,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0001485,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_sa_east_1",
+        "uuid": "f1233d3f-c0bb-4e8a-89c9-40493cbc5e05",
+        "id": "cpu-provider_aws-region_sa_east_1",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "BR-SAO",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0001485,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0009121,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_us_east_1",
+        "uuid": "3f43bd72-72de-420f-9fa4-7b1ea68b3a45",
+        "id": "cpu-provider_aws-region_us_east_1",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "US-VA",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0009121,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.000988,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_us_east_2",
+        "uuid": "3bb76a50-0938-4622-8cd0-356437895e66",
+        "id": "cpu-provider_aws-region_us_east_2",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "US-OH",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.000988,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0009121,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_us_gov_east_1",
+        "uuid": "ff534779-4b70-4e89-a247-101da51ce267",
+        "id": "cpu-provider_aws-region_us_gov_east_1",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "US",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0009121,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0007752,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_us_gov_west_1",
+        "uuid": "0da8859b-c54e-4478-8d84-62e9bac38e54",
+        "id": "cpu-provider_aws-region_us_gov_west_1",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "US",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0007752,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0007752,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_us_west_1",
+        "uuid": "ca852048-d217-4910-be7c-2004280312b6",
+        "id": "cpu-provider_aws-region_us_west_1",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "US-GIR",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0007752,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    },
+    {
+      "co2e": 0.0007752,
+      "co2e_unit": "kg",
+      "co2e_calculation_method": "ar4",
+      "co2e_calculation_origin": "source",
+      "emission_factor": {
+        "activity_id": "cpu-provider_aws-region_us_west_2",
+        "uuid": "5bd5a5a4-c098-414b-8abf-cbdf82d4c456",
+        "id": "cpu-provider_aws-region_us_west_2",
+        "access_type": "public",
+        "source": "CCF",
+        "year": "2022",
+        "region": "US-OR",
+        "category": "Cloud Computing - CPU",
+        "lca_activity": "use_phase",
+        "data_quality_flags": [
+          "notable_methodological_variance"
+        ]
+      },
+      "constituent_gases": {
+        "co2e_total": 0.0007752,
+        "co2e_other": null,
+        "co2": null,
+        "ch4": null,
+        "n2o": null
+      }
+    }
+  ]
+}

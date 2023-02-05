@@ -1,3 +1,6 @@
+let USERNAME;
+let PASSWORD;
+
 function adjustSiteColor(amount, maxAmount) {
     let p = 1 - (amount / maxAmount)
     if (p > 0.5) {
@@ -115,7 +118,8 @@ async function loadCategories() {
             ]
         }
     }; await sleep(0); // TODO: replace when API
-
+    // const data = await fetch("https://localhost:5000/api/"+USERNAME+"?password="+PASSWORD).then(response => response.json());
+    // console.log(data);
     updateCategories(categories);
 }
 
@@ -214,6 +218,9 @@ function addFriend() {
 async function login() {
     let name = document.getElementById("nameField").value;
     let passwd = document.getElementById("passField").value;
+
+    USERNAME = name;
+    PASSWORD = passwd;
 
     let data = await fetch("http://localhost:5000/login?username=" + name + "&password=" + passwd);
     console.log(data)

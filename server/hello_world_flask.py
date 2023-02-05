@@ -1,4 +1,5 @@
 import db_tools as tools
+from datetime import datetime
 import flask_cors
 import pytricia
 import dotenv, sqlite3, pathlib, requests, json
@@ -57,32 +58,38 @@ def get_co2(ip:str):
 
 class Rest(Resource):
     def get(self, name):
-        if not tools.validate(request.form["username"],request.form["password"]):
+        if not tools.validate(name,request.args["password"]):
             return
         return tools.getCategories(name)
 
     def put(self, name):
-        if not tools.validate(request.json["username"],request.json["password"]):
+        if not tools.validate(name,request.json["password"]):
             return
-        print(request.json)
+        # print(request.json)
         data = request.json["hosts"]
         co2 = sum(get_co2(d["ip"])*d["transferred"] for d in data.values()) # fix ratio :/
-        url,time = request.json["url"],request.json["timestamp"]
+        url = request.json["url"]
+        time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         logo,category = get_url_data(url)
-        print(name,time,url,category,co2,logo)
-        # tools.update_row(name,time,url,category,co2,logo)
+        # print(name,time,url,category,co2,logo)
+        tools.update_row(name,time,url,category,co2,logo)
         return {}
 
 class Auth(Resource):
     def get(self):
         res = tools.validate(request.args["username"],request.args["password"])
         print(res)
-        return res, 200 if res else 403
+        return res, 200 if res else 403 # an utter crime
     
     def post(self):
         #check user in db?
         print("Thanks for calling, I aws so lonely")
-        tools.register(request.form["username"],request.form["password"])
+        data = json.loads(request.data)
+        print(data)
+        print(data["username"],data["password"])
+        tools.register(data["username"],data["password"])
+
+        return {}
 
 # @app.before_request
 # def before_req():

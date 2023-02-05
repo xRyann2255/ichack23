@@ -102,6 +102,20 @@ def login(name, password):
     else:
         return False
 
+def addFriend(name1, name2):
+    db.execute("""
+        CREATE TABLE IF NOT EXISTS friends (
+            name1 TEXT PRIMARY KEY,
+            name2 TEXT NOT NULL,
+        )
+    """)
+
+    db.execute("""INSERT INTO friends (name1, name2)
+    VALUES (?, ?)
+    """, (name1, name2))
+
+    db.commit()
+
 if __name__ == '__main__':
     update_row('Ryan', datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'www.example.com', 'Transportation', 50, 'www.example.com/logo.png')
     update_row('Ryan', '2023-02-05 12:00:00', 'www.example.com', 'Food', 30, 'www.example.com/logo.png')

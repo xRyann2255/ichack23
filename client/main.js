@@ -47,6 +47,7 @@ function updateCategories(categories) {
     let total = 0;
     let maxCategoryAmount = 0;
     let maxSiteAmount = 0;
+    let ctg = [];
     for (const key in categories) {
         let category = categories[key]
         let categoryTotal = 0;
@@ -54,16 +55,24 @@ function updateCategories(categories) {
             categoryTotal += site.amount;
             maxSiteAmount = Math.max(maxSiteAmount, site.amount);
         }
+        category.sites.sort((a,b) => b.amount > a.amount ? 1 : -1);
         category.amount = categoryTotal;
         maxCategoryAmount = Math.max(maxCategoryAmount, category.amount);
         total += categoryTotal;
+
+        ctg.push([key, category]);
     }
+
+    console.log(ctg);
+    ctg.sort((a,b) => b[1].amount > a[1].amount ? 1 : -1);
+    console.log(ctg);
 
     let categoryTemplate = document.getElementById("templates").getElementsByClassName("category")[0]
     let siteTemplate = document.getElementById("templates").getElementsByClassName("site")[0]
 
-    for (const key in categories) {
-        let category = categories[key]
+    for (const tuple of ctg) {
+        let key = tuple[0];
+        let category = tuple[1];
         let categoryElement = categoryTemplate.cloneNode(true)
         for (const site of category.sites) {
             site.percentage = Math.round(site.amount / total * 100);
@@ -103,25 +112,13 @@ function toggleCollapse(element) {
 }
 
 function onLoad() {
+
 }
 
 async function loadCategories() {
-    const categories = {
-        "Streaming": {percentage: 0, amount: 0, sites: [
-                {name: "Netflix", icon: "https://raw.githubusercontent.com/karlhadwen/netflix/master/public/favicon.ico", percentage: 0, amount: 42.4325},
-                {name: "Amazon Prime", icon: "https://upload.wikimedia.org/wikipedia/commons/d/de/Amazon_icon.png", percentage: 0, amount: 24.231742},
-                {name: "Disney+", percentage: 0, amount: 5.241}
-            ]
-        }, "Shopping": {percentage: 0, amount: 0, sites: [
-                {name: "Amazon", icon: "https://upload.wikimedia.org/wikipedia/commons/d/de/Amazon_icon.png", percentage: 0, amount: 18.5235},
-                {name: "Ebay", percentage: 0, amount: 16.1245}
-            ]
-        }
-    }; // TODO: replace when API
     const data = await fetch(
             "http://localhost:5000/api/"+USERNAME+"?password="+PASSWORD
         ).then(response => response.json());
-    console.log(data);
     updateCategories(JSON.parse(data));
 }
 
@@ -234,7 +231,6 @@ async function login() {
     PASSWORD = passwd;
 
     let data = await fetch("http://localhost:5000/login?username=" + name + "&password=" + passwd);
-    console.log(data)
 
     // TODO: connect to API
     if (data.status === 200) {

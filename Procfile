@@ -1,1 +1,1 @@
-worker: python server/hello_world_flask.py
+web: gunicorn server.hello_world_flask:app

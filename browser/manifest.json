@@ -3,6 +3,7 @@
   "name": "IC Hack 23",
   "version": "1.0",
   "permissions": [
+    "storage",
     "webRequest",
     "tabs"
   ],
@@ -10,6 +11,7 @@
     "http://localhost:3001/*",
     "*://*/*"
   ],
+  "options_page": "options.html",
   "content_scripts": [
     {
       "matches": [

@@ -30,7 +30,13 @@ chrome.runtime.onConnect.addListener(function (port) {
     });
 });
 
+let auth = {
+    "username": "Ryan",
+    "password": "abc"
+};
+
 function flushBuffer() {
+    buffer["auth"] = auth;
     fetch("http://localhost:3001/example", {
         method: "post", body: JSON.stringify(buffer, function (key, val) {
             if (val == null) return "N/A";
@@ -44,7 +50,17 @@ function flushBuffer() {
     });
 }
 
+function getUsernamePassword() {
+    chrome.storage.sync.get({
+        username: 'Ryan', password: 'abc'
+    }, function (items) {
+        auth = {"username": items.username, "password": items.password};
+    });
+}
+
 const interval = setInterval(() => {
     console.log(buffer);
     flushBuffer();
 }, 5 * 1000)
+
+

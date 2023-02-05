@@ -6,6 +6,10 @@ import pathlib
 
 import json
 
+import random
+
+import string
+
 HOME = pathlib.Path(__file__).parent.absolute()
 
 db = sqlite3.connect(HOME/'test.db')
@@ -64,20 +68,24 @@ import hashlib
 import sqlite3
 
 def register(name, password):
-    # TODO JIM
+    letters = string.ascii_lowercase
+    salt = ''.join(random.choice(letters) for i in range(20))
+    dbPassword = password+salt
+    hash = hashlib.sha256(dbPassword.encode()).hexdigest()
 
     db.execute("""
         CREATE TABLE IF NOT EXISTS users (
             name TEXT PRIMARY KEY,
-            password_hash TEXT NOT NULL
+            hash TEXT NOT NULL,
+            salt TEXT NOT NULL
         )
     """)
 
     # Insert the new user into the users table
     db.execute("""
-        INSERT INTO users (name, password_hash, salt)
+        INSERT INTO users (name, hash, salt)
         VALUES (?, ?, ?)
-    """, (name, password_hash, salt))
+    """, (name, hash, salt))
 
     # Commit the changes and close the database connection
     db.commit()

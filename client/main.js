@@ -2,18 +2,14 @@ function adjustSiteColor(amount, maxAmount) {
     let p = 1 - (amount / maxAmount)
     if (p > 0.5) {
         let r = Math.round(208 + (1 - p) * 2 * 47);
-        console.log(r);
         let rHex = r.toString(16)
-        console.log(rHex);
         if (rHex.length == 1) {
             rHex = "0" + rHex;
         }
         return "#" + rHex + "ffd0";
     } else {
         let g = Math.round(208 + p * 2 * 47);
-        console.log(g);
         let gHex = g.toString(16)
-        console.log(gHex);
         if (gHex.length == 1) {
             gHex = "0" + gHex;
         }
@@ -25,18 +21,14 @@ function adjustCategoryColor(amount, maxAmount) {
     let p = 1 - (amount / maxAmount)
     if (p > 0.5) {
         let r = Math.round(160 + (1 - p) * 2 * 95);
-        console.log(r);
         let rHex =r.toString(16)
-        console.log(rHex);
         if (rHex.length == 1) {
             rHex = "0" + rHex;
         }
         return "#" + rHex + "ffa0";
     } else {
         let g = Math.round(160 + p * 2 * 95);
-        console.log(g);
         let gHex = g.toString(16)
-        console.log(gHex);
         if (gHex.length == 1) {
             gHex = "0" + gHex;
         }
@@ -219,9 +211,12 @@ function addFriend() {
     // TODO
 }
 
-function login() {
+async function login() {
     let name = document.getElementById("nameField").value;
     let passwd = document.getElementById("passField").value;
+
+    let data = await fetch("http://localhost:5000/login?username=" + name + "&password=" + passwd);
+    console.log(data)
 
     // TODO: connect to API
 
@@ -234,7 +229,7 @@ function login() {
 async function register() {
     let name = document.getElementById("nameField").value;
     let passwd = document.getElementById("passField").value;
-    let data = await fetch("http://localhost:5000/login", {
+    await fetch("http://localhost:5000/login", {
         method: "POST",
         body: JSON.stringify({
             username: name,

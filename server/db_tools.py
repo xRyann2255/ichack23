@@ -152,6 +152,5 @@ if __name__ == '__main__':
     print(addFriend("Ryan", "Jim"))
     print(addFriend("Ryan", "Alex"))
     print(addFriend("Ryan", "Jack"))
-    print("ok")
     print(leaderboard("Ryan"))
     

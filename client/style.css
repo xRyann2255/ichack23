@@ -229,6 +229,10 @@ h3 {
     left: -100%;
 }
 
+#slider.slide3 {
+    left: 100%;
+}
+
 #leaderboardSlide {
     padding: 20px;
     position: absolute;
@@ -280,4 +284,19 @@ h6 {
 
 .leaderboard-header {
     background-color: #ffe080;
+}
+
+#loginSlide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: -100%;
+    width: 100%;
+    height: 100vh;
+}
+
+#nameField, #passField {
+    width: 400px;
 }

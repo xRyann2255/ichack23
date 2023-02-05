@@ -73,6 +73,21 @@ def loadGraph(name):
         points[i+1] = (time, value + points[i][1])
     return json.dumps(points)
 
+def lastMonthData(name):
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    lastMonth = '0' + str(int(timestamp.split()[0].split('-')[1]) - 1)
+    categories = [x[0] for x in db.execute(f"SELECT DISTINCT category FROM '{name}'").fetchall()]
+    categoryTotals = {}
+    for category in categories:
+        emissions = db.execute(f"SELECT timestamp, co2_emissions FROM '{name}' WHERE category='{category}'").fetchall()
+        emissions = list(filter(lambda x: x[0].split()[0].split('-')[1] == lastMonth, emissions))
+        categoryTotals[category] = sum(map(lambda x: x[1], emissions))
+    return json.dumps(categoryTotals)
+    
+
+
+    print(categories)
+
 def register(name, password):
     letters = string.ascii_lowercase
     salt = ''.join(random.choice(letters) for i in range(20))
@@ -156,6 +171,9 @@ if __name__ == '__main__':
     update_row('Ryan', '2023-02-06 12:10:00', 'www.anothersite.com', 'Electricity', 40, 'www.anothersite.com/logo.png')
     update_row('Ryan', '2023-02-07 12:00:00', 'www.yetanotherexample.com', 'Transportation', 60, 'www.yetanotherexample.com/logo.png')
     update_row('Ryan', '2023-02-08 12:00:00', 'www.example.com', 'Food', 25, 'www.example.com/logo.png')
+    update_row('Ryan', '2023-01-15 12:05:00', 'www.example.com', 'Food', 70, 'www.example.com/logo.png')
+    update_row('Ryan', '2023-01-05 12:05:00', 'www.example.com', 'Food', 10, 'www.example.com/logo.png')
+    update_row('Ryan', '2023-01-16 12:00:00', 'www.anothersite.com', 'Electricity', 20, 'www.anothersite.com/logo.png')
     update_row('Jim', '2023-02-09 12:00:00', 'www.anothersite.com', 'Electricity', 35, 'www.anothersite.com/logo.png')
     update_row('Jim', '2023-02-06 12:00:00', 'www.anothersite.com', 'Electricity', 40, 'www.anothersite.com/logo.png')
     update_row('Alex', '2023-02-07 12:00:00', 'www.yetanotherexample.com', 'Transportation', 60, 'www.yetanotherexample.com/logo.png')
@@ -173,4 +191,5 @@ if __name__ == '__main__':
     print(addRelation("Jim", "Jack", "local"))
     print(addRelation("Jim", "Ryan", "local"))
     print(leaderboard("Jim", "local"))
+    print(lastMonthData("Ryan"))
     

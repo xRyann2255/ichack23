@@ -129,7 +129,7 @@ async function loadCategories() {
         }
     };
     const data = await fetch(
-            "http://localhost:5000/api/"+USERNAME+"?password="+PASSWORD
+            "http://35.242.181.37:5000/api/"+USERNAME+"?password="+PASSWORD
         ).then(response => response.json());
     updateCategories(JSON.parse(data));
 }
@@ -141,7 +141,7 @@ async function loadGraph() {
         [new Date("'December 17, 2022 05:00:00"), 100],
     ];
 
-    var data = await fetch("http://localhost:5000/graph/"+USERNAME+"?password="+PASSWORD).then(response => response.json());
+    var data = await fetch("http://35.242.181.37:5000/graph/"+USERNAME+"?password="+PASSWORD).then(response => response.json());
     console.log("Pear "+data);
 
     const xValues = [];
@@ -191,7 +191,7 @@ async function loadLeaderboard() {
     //     {name: "Ryan", amount: 1089.57418789325}
     // ];
     // add type switch, as additional arg "type" = local/friends
-    let data = await fetch("http://localhost:5000/leaderboard/"+USERNAME+"?password="+PASSWORD).then(response => response.json());
+    let data = await fetch("http://35.242.181.37:5000/leaderboard/"+USERNAME+"?password="+PASSWORD).then(response => response.json());
     console.log("banana"+data);
     const players = JSON.parse(data);
 
@@ -232,7 +232,7 @@ function mainSlide() {
 async function addFriend() {
     // TODO: Connect to API
     var other = document.getElementById("friendField").value;
-    let data = await fetch("http://localhost:5000/friends/"+USERNAME+"?password="+PASSWORD+"&other="+other).then(response => response.json());
+    let data = await fetch("http://35.242.181.37:5000/friends/"+USERNAME+"?password="+PASSWORD+"&other="+other).then(response => response.json());
     // console.log("coconut"+data);
     hideAddFriend();
     loadLeaderboard();
@@ -253,7 +253,7 @@ async function login() {
     USERNAME = name;
     PASSWORD = passwd;
 
-    let data = await fetch("http://localhost:5000/login?username=" + name + "&password=" + passwd);
+    let data = await fetch("http://35.242.181.37:5000/login?username=" + name + "&password=" + passwd);
 
     // TODO: connect to API
     if (data.status === 200) {
@@ -267,7 +267,7 @@ async function login() {
 async function register() {
     let name = document.getElementById("nameField").value;
     let passwd = document.getElementById("passField").value;
-    await fetch("http://localhost:5000/login", {
+    await fetch("http://35.242.181.37:5000/login", {
         method: "POST",
         body: JSON.stringify({
             username: name,

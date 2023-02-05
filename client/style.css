@@ -92,6 +92,7 @@ h3 {
     animation-duration: 0.5s;
     animation-delay: 0.7s;
     animation-fill-mode: forwards;
+    margin-bottom: 20px;
 }
 
 .categoryHeader {
@@ -340,4 +341,8 @@ input:active {
 
 .friendpopupfield {
     padding-left: 10px;
+}
+
+#lastmonth {
+    margin-top: 10px;
 }

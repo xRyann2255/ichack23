@@ -41,6 +41,10 @@ def get_websites(name):
 
     #return db.execute(f"SELECT website, logo_URL, category, co2_emissions FROM {name} ORDER BY timestamp").fetchall()
 
+def data_over_time(name):
+    data = db.execute(f"SELECT timestamp, co2_emissions FROM {name} ORDER BY timestamp").fetchall()
+    return sorted(data)
+
 def data_points(name):
     points = db.execute(f"SELECT timestamp, co2_emissions FROM {name} ORDER BY timestamp").fetchall()
     # Starting from the second value, add the previous total to the current value to calculate the overall total at a given time

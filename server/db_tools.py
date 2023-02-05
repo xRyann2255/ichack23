@@ -106,15 +106,24 @@ def addFriend(name1, name2):
     db.execute("""
         CREATE TABLE IF NOT EXISTS friends (
             name1 TEXT PRIMARY KEY,
-            name2 TEXT NOT NULL,
+            name2 TEXT NOT NULL
         )
     """)
 
-    db.execute("""INSERT INTO friends (name1, name2)
-    VALUES (?, ?)
-    """, (name1, name2))
+    try:
 
-    db.commit()
+        db.execute("""INSERT INTO friends (name1, name2)
+        VALUES (?, ?)
+        """, (name1, name2))
+
+        db.commit()
+
+        return loadGraph(name2).split()[-1][:-2]
+    
+    except:
+        
+        return False
+
 
 if __name__ == '__main__':
     update_row('Ryan', datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'www.example.com', 'Transportation', 50, 'www.example.com/logo.png')
@@ -127,3 +136,7 @@ if __name__ == '__main__':
     update_row('Alex', '2023-02-07 12:00:00', 'www.yetanotherexample.com', 'Transportation', 60, 'www.yetanotherexample.com/logo.png')
     update_row('Alex', '2023-02-08 12:00:00', 'www.example.com', 'Food', 25, 'www.example.com/logo.png')
     update_row('Jack', '2023-02-09 12:00:00', 'www.anothersite.com', 'Electricity', 35, 'www.anothersite.com/logo.png')
+    register("Jim", "abc")
+    register("Ryan", "abc")
+    print(addFriend("Ryan", "Jim"))
+    

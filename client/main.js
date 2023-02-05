@@ -1,19 +1,18 @@
+// let USERNAME;
+// let PASSWORD;
+
 function adjustSiteColor(amount, maxAmount) {
     let p = 1 - (amount / maxAmount)
     if (p > 0.5) {
         let r = Math.round(208 + (1 - p) * 2 * 47);
-        console.log(r);
         let rHex = r.toString(16)
-        console.log(rHex);
         if (rHex.length == 1) {
             rHex = "0" + rHex;
         }
         return "#" + rHex + "ffd0";
     } else {
         let g = Math.round(208 + p * 2 * 47);
-        console.log(g);
         let gHex = g.toString(16)
-        console.log(gHex);
         if (gHex.length == 1) {
             gHex = "0" + gHex;
         }
@@ -25,18 +24,14 @@ function adjustCategoryColor(amount, maxAmount) {
     let p = 1 - (amount / maxAmount)
     if (p > 0.5) {
         let r = Math.round(160 + (1 - p) * 2 * 95);
-        console.log(r);
         let rHex =r.toString(16)
-        console.log(rHex);
         if (rHex.length == 1) {
             rHex = "0" + rHex;
         }
         return "#" + rHex + "ffa0";
     } else {
         let g = Math.round(160 + p * 2 * 95);
-        console.log(g);
         let gHex = g.toString(16)
-        console.log(gHex);
         if (gHex.length == 1) {
             gHex = "0" + gHex;
         }
@@ -52,7 +47,8 @@ function updateCategories(categories) {
     let total = 0;
     let maxCategoryAmount = 0;
     let maxSiteAmount = 0;
-    for (const category of categories) {
+    for (const key in categories) {
+        let category = categories[key]
         let categoryTotal = 0;
         for (const site of category.sites) {
             categoryTotal += site.amount;
@@ -66,7 +62,8 @@ function updateCategories(categories) {
     let categoryTemplate = document.getElementById("templates").getElementsByClassName("category")[0]
     let siteTemplate = document.getElementById("templates").getElementsByClassName("site")[0]
 
-    for (const category of categories) {
+    for (const key in categories) {
+        let category = categories[key]
         let categoryElement = categoryTemplate.cloneNode(true)
         for (const site of category.sites) {
             site.percentage = Math.round(site.amount / total * 100);
@@ -89,7 +86,7 @@ function updateCategories(categories) {
 
         let categoryHeader = categoryElement.getElementsByClassName("categoryHeader")[0];
 
-        categoryHeader.getElementsByClassName("categoryName")[0].innerHTML = category.name;
+        categoryHeader.getElementsByClassName("categoryName")[0].innerHTML = key;
         categoryHeader.getElementsByClassName("categoryAmount")[0].innerHTML = Math.round(category.amount * 100) / 100 + " kg";
         categoryHeader.getElementsByClassName("categoryPercent")[0].innerHTML = "(" + Math.round(category.percentage * 100) / 100 + "%)";
         categoryHeader.style.backgroundColor = adjustCategoryColor(category.amount, maxCategoryAmount);
@@ -106,43 +103,38 @@ function toggleCollapse(element) {
 }
 
 function onLoad() {
-    loadCategories();
-    loadGraph();
-    loadLeaderboard();
 }
 
 async function loadCategories() {
-    const categories = [
-        {
-            name: "Streaming", percentage: 0, amount: 0, sites: [
+    const categories = {
+        "Streaming": {percentage: 0, amount: 0, sites: [
                 {name: "Netflix", icon: "https://raw.githubusercontent.com/karlhadwen/netflix/master/public/favicon.ico", percentage: 0, amount: 42.4325},
                 {name: "Amazon Prime", icon: "https://upload.wikimedia.org/wikipedia/commons/d/de/Amazon_icon.png", percentage: 0, amount: 24.231742},
                 {name: "Disney+", percentage: 0, amount: 5.241}
             ]
-        },
-        {
-            name: "Shopping", percentage: 0, amount: 0, sites: [
+        }, "Shopping": {percentage: 0, amount: 0, sites: [
                 {name: "Amazon", icon: "https://upload.wikimedia.org/wikipedia/commons/d/de/Amazon_icon.png", percentage: 0, amount: 18.5235},
                 {name: "Ebay", percentage: 0, amount: 16.1245}
             ]
         }
-    ]; await sleep(0); // TODO: replace when API
-
+    }; await sleep(0); // TODO: replace when API
+    // const data = await fetch("https://localhost:5000/api/"+USERNAME+"?password="+PASSWORD).then(response => response.json());
+    // console.log(data);
     updateCategories(categories);
 }
 
 async function loadGraph() {
     const carbonOverTime = [
-        {time: new Date("'December 17, 2022 03:24:00"), amount: 50},
-        {time: new Date("'December 17, 2022 04:00:00"), amount: 60},
-        {time: new Date("'December 17, 2022 05:00:00"), amount: 100},
+        [new Date("'December 17, 2022 03:24:00"), 50],
+        [new Date("'December 17, 2022 04:00:00"), 60],
+        [new Date("'December 17, 2022 05:00:00"), 100],
     ]; await sleep(0); // TODO: replace when API
 
     const xValues = [];
     const yValues = [];
     for (const carbonTime of carbonOverTime) {
-        xValues.push(carbonTime.time);
-        yValues.push(carbonTime.amount);
+        xValues.push(carbonTime[0]);
+        yValues.push(carbonTime[1]);
     }
 
     const config = {
@@ -215,11 +207,44 @@ function leaderboardSlide() {
 
 function mainSlide() {
     let slider = document.getElementById("slider");
+    slider.classList.remove("slide3")
     slider.classList.remove("slide2")
 }
 
 function addFriend() {
     // TODO
+}
+
+async function login() {
+    let name = document.getElementById("nameField").value;
+    let passwd = document.getElementById("passField").value;
+
+    // USERNAME = name;
+    // PASSWORD = passwd;
+
+    let data = await fetch("http://localhost:5000/login?username=" + name + "&password=" + passwd);
+    console.log(data)
+
+    // TODO: connect to API
+    if (data.status === 200) {
+        loadCategories();
+        loadGraph();
+        loadLeaderboard();
+        mainSlide();
+    }
+}
+
+async function register() {
+    let name = document.getElementById("nameField").value;
+    let passwd = document.getElementById("passField").value;
+    await fetch("http://localhost:5000/login", {
+        method: "POST",
+        body: JSON.stringify({
+            username: name,
+            password: passwd
+        })
+    });
+    login();
 }
 
 window.onload = onLoad;

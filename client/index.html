@@ -5,6 +5,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;800&display=swap" rel="stylesheet">
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="style.css">
 
     <title>Carbonara</title>
@@ -16,7 +18,16 @@
     <script src="main.js"></script>
 </head>
 <body>
-<div id="slider">
+<div id="slider" class="slide3">
+    <div id="loginSlide">
+        <h7>Log in to Carbonara...</h7>
+        <div class="field">Username <input id="nameField"></div>
+        <div class="field">Password <input type="password" id="passField"></div>
+        <div class="field">
+            <div id="loginButton" onclick="login()">Login</div>
+            <div id="registerButton" onclick="register()">Register</div>
+        </div>
+    </div>
     <div id="mainSlide">
         <div id="stats">
             <h2>You have produced</h2>

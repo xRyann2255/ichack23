@@ -1,0 +1,27 @@
+{
+  "co2e": 0.0007988,
+  "co2e_unit": "kg",
+  "co2e_calculation_method": "ar4",
+  "co2e_calculation_origin": "source",
+  "emission_factor": {
+    "activity_id": "networking-provider_azure-region_east_asia",
+    "uuid": "76e5b5f8-d876-4ed0-9e83-79545bd2d4ca",
+    "id": "networking-provider_azure-region_east_asia",
+    "access_type": "public",
+    "source": "CCF",
+    "year": "2022",
+    "region": "HK-HKG",
+    "category": "Cloud Computing - Networking",
+    "lca_activity": "use_phase",
+    "data_quality_flags": [
+      "notable_methodological_variance"
+    ]
+  },
+  "constituent_gases": {
+    "co2e_total": 0.0007988,
+    "co2e_other": null,
+    "co2": null,
+    "ch4": null,
+    "n2o": null
+  }
+}

@@ -239,10 +239,7 @@ async function register() {
         body: JSON.stringify({
             username: name,
             password: passwd
-        }),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        }
+        })
     });
     login();
 }

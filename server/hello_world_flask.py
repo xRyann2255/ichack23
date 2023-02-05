@@ -1,3 +1,5 @@
+import sys
+sys.path.append('/app/server/')
 import db_tools as tools
 from datetime import datetime
 import flask_cors

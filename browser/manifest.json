@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "IC Hack 23",
+  "name": "Carbonara",
   "version": "1.0",
   "permissions": [
     "storage",
@@ -18,11 +18,17 @@
         "<all_urls>"
       ],
       "js": [
-        "main.js"
+        "main.js",
+        "ui/chart.js",
+        "ui/chartjs-adapter-date-fns.bundle.min.js",
+        "ui/main.js"
       ],
       "run_at": "document_start"
     }
   ],
+  "action": {
+    "default_popup": "ui/index.html"
+  },
   "background": {
     "service_worker": "service.js"
   }

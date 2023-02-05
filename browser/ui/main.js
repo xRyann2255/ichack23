@@ -264,6 +264,17 @@ async function login() {
     }
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    let loginButton = document.getElementById('loginButton');
+    loginButton.addEventListener('click', function() {
+        login();
+    });
+    let registerButton = document.getElementById('registerButton');
+    registerButton.addEventListener('click', function() {
+        register();
+    });
+});
+
 async function register() {
     let name = document.getElementById("nameField").value;
     let passwd = document.getElementById("passField").value;

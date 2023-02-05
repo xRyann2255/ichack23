@@ -1,5 +1,5 @@
-// let USERNAME;
-// let PASSWORD;
+let USERNAME;
+let PASSWORD;
 
 function adjustSiteColor(amount, maxAmount) {
     let p = 1 - (amount / maxAmount)
@@ -228,8 +228,8 @@ async function login() {
     let name = document.getElementById("nameField").value;
     let passwd = document.getElementById("passField").value;
 
-    // USERNAME = name;
-    // PASSWORD = passwd;
+    USERNAME = name;
+    PASSWORD = passwd;
 
     let data = await fetch("http://localhost:5000/login?username=" + name + "&password=" + passwd);
     console.log(data)

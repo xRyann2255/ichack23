@@ -59,6 +59,29 @@ def loadGraph(name):
         points[i+1] = (time, value + points[i][1])
     return json.dumps(points)
 
+import hashlib
+import sqlite3
+
+def register(name, password):
+    # TODO JIM
+
+    db.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            name TEXT PRIMARY KEY,
+            password_hash TEXT NOT NULL
+        )
+    """)
+
+    # Insert the new user into the users table
+    db.execute("""
+        INSERT INTO users (name, password_hash, salt)
+        VALUES (?, ?, ?)
+    """, (name, password_hash, salt))
+
+    # Commit the changes and close the database connection
+    db.commit()
+
+
 # Run on login
 def login(name):
     result = db.execute("SELECT name FROM sqlite_master WHERE type='table' AND name=?", (name,)).fetchall()

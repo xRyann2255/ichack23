@@ -36,7 +36,7 @@ let auth = {
 
 function flushBuffer() {
     getUsernamePassword();
-    fetch("http://localhost:5000/api/" + auth["username"], {
+    fetch("http://35.242.181.37:5000/api/" + auth["username"], {
         method: "post", body: JSON.stringify({"password": auth["password"], "hosts": buffer}, function (key, val) {
             if (val == null) return "N/A";
             return val.toFixed ? Number(val.toFixed(3)) : val;

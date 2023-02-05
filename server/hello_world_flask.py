@@ -52,7 +52,7 @@ def get_url_data(url: str):
         },
     )
     print(url)
-    print(resp)
+    print(resp.text)
     data = resp.json()
     print(f"{data = }")
     if "domain" not in data: return (None, None)

@@ -55,10 +55,13 @@ def get_co2(ip:str):
 
 class Rest(Resource):
     def get(self, name):
-        return tools.get_websites(name)
+        if not tools.validate(request.form["username"],request.form["password"]):
+            return
+        return tools.getCategories(name)
 
     def put(self, name):
-        
+        if not tools.validate(request.json["username"],request.json["password"]):
+            return
         print(request.json)
         data = request.json["hosts"]
         co2 = sum(get_co2(d["ip"])*d["transferred"] for d in data.values()) # fix ratio :/
